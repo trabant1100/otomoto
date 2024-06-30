@@ -60,6 +60,19 @@ def ordinal(n):
     suffix = {1: 'st', 2: 'nd', 3: 'rd'}
     return f"{n}{suffix.get(n if n not in {11, 12, 13} else n % 10, 'th')}"
 
+def adjust_column_widths(ws):
+    for col in ws.columns:
+        max_length = 0
+        for cell in col:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(str(cell.value))
+            except:
+                pass
+        adjusted_width = (max_length + 2) * 1.2  # Adjust as needed
+        col_letter = col[0].column_letter
+        ws.column_dimensions[col_letter].width = adjusted_width
+
 if __name__ == "__main__":
     directory = os.getcwd()  # Set to the current directory
     extension = 'xlsx'
@@ -83,6 +96,13 @@ if __name__ == "__main__":
             entries.sort(key=lambda x: x[1]['Date'])
             for workbook, row in entries:
                 ws.append(list(row.values()))
+        
+        # Adjust column widths to fit content
+        adjust_column_widths(ws)
+
+        # Manually adjust the width of the 'Date' column
+        date_column_letter = ws.cell(row=1, column=1).column_letter
+        ws.column_dimensions[date_column_letter].width = 15  # Adjust width based on your date format
 
     output_file = os.path.join(directory, 'report.xlsx')
     output_wb.save(output_file)
