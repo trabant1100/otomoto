@@ -1,0 +1,89 @@
+import glob
+import os
+from openpyxl import load_workbook, Workbook
+from datetime import datetime
+from collections import defaultdict
+import re
+
+def read_all_excel_files_to_dict(directory, extension):
+    if not extension.startswith('.'):
+        extension = '.' + extension
+
+    pattern = os.path.join(directory, f'*{extension}')
+    files = glob.glob(pattern)
+
+    all_data = {}
+
+    for file in files:
+        # Check if the file matches the expected date format in the filename
+        if re.match(r'\d{2}\.\d{2}\.\d{4}\.xlsx', os.path.basename(file)):
+            try:
+                wb = load_workbook(file)
+                workbook_data = []
+                for sheet in wb.sheetnames:
+                    ws = wb[sheet]
+                    headers = [cell.value for cell in ws[1]]  # Assuming first row is the header
+                    # Add a Date column based on the filename
+                    headers.insert(0, 'Date')
+                    date_value = datetime.strptime(os.path.splitext(os.path.basename(file))[0], '%d.%m.%Y').date()
+                    for row in ws.iter_rows(min_row=2, values_only=True):
+                        row_data = {headers[i]: row[i-1] if i > 0 else date_value for i in range(len(headers))}
+                        workbook_data.append(row_data)
+                # Sort workbook_data by 'Date' column
+                workbook_data.sort(key=lambda x: x['Date'])
+                all_data[os.path.basename(file)] = workbook_data
+            except Exception as e:
+                print(f"Error opening {file}: {e}")
+
+    return all_data
+
+def group_by_thumbnail(all_workbooks_data, thumbnail_column):
+    grouped_data = defaultdict(list)
+    
+    for workbook, data in all_workbooks_data.items():
+        for row in data:
+            thumbnail = row.get(thumbnail_column)
+            if thumbnail:
+                grouped_data[thumbnail].append((workbook, row))
+    
+    return grouped_data
+
+def sanitize_sheet_title(title, max_length=31):
+    # Replace invalid characters with underscores or remove them
+    sanitized_title = re.sub(r'[\\/*?[\]:]', '_', title)
+    # Ensure the title is no longer than the maximum allowed length
+    if len(sanitized_title) > max_length:
+        sanitized_title = sanitized_title[:max_length]
+    return sanitized_title
+
+def ordinal(n):
+    suffix = {1: 'st', 2: 'nd', 3: 'rd'}
+    return f"{n}{suffix.get(n if n not in {11, 12, 13} else n % 10, 'th')}"
+
+if __name__ == "__main__":
+    directory = os.getcwd()  # Set to the current directory
+    extension = 'xlsx'
+    thumbnail_column = 'thumbnail'  # Replace with your actual column name for thumbnails
+
+    all_workbooks_data = read_all_excel_files_to_dict(directory, extension)
+
+    grouped_data = group_by_thumbnail(all_workbooks_data, thumbnail_column)
+
+    output_wb = Workbook()
+    output_wb.remove(output_wb.active)  # Remove default sheet
+
+    for idx, (thumbnail, entries) in enumerate(grouped_data.items(), start=1):
+        ordinal_number = ordinal(idx)
+        sheet_title = sanitize_sheet_title(f"{ordinal_number}_{thumbnail}")
+        ws = output_wb.create_sheet(title=sheet_title)
+        if entries:
+            headers = list(entries[0][1].keys())
+            ws.append(headers)
+            # Sort entries by 'Date' column before appending to worksheet
+            entries.sort(key=lambda x: x[1]['Date'])
+            for workbook, row in entries:
+                ws.append(list(row.values()))
+
+    output_file = os.path.join(directory, 'report.xlsx')
+    output_wb.save(output_file)
+    print(f"Data written to {output_file}")
