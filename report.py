@@ -1,9 +1,13 @@
 import glob
 import os
 from openpyxl import load_workbook, Workbook
+from openpyxl.drawing.image import Image
+from openpyxl.utils import get_column_letter
 from datetime import datetime
 from collections import defaultdict
 import re
+import requests
+from io import BytesIO
 
 def read_all_excel_files_to_dict(directory, extension):
     if not extension.startswith('.'):
@@ -73,6 +77,17 @@ def adjust_column_widths(ws):
         col_letter = col[0].column_letter
         ws.column_dimensions[col_letter].width = adjusted_width
 
+def insert_image_from_url(ws, url, row_index, image_width=320, image_height=240):
+    try:
+        response = requests.get(url)
+        img = Image(BytesIO(response.content))
+        img.width = image_width
+        img.height = image_height
+        img.anchor = f'B{row_index}'  # Position image in column 'B', adjust as needed
+        ws.add_image(img)
+    except Exception as e:
+        print(f"Error inserting image from {url}: {e}")
+
 if __name__ == "__main__":
     directory = os.getcwd()  # Set to the current directory
     extension = 'xlsx'
@@ -91,18 +106,18 @@ if __name__ == "__main__":
         ws = output_wb.create_sheet(title=sheet_title)
         if entries:
             headers = list(entries[0][1].keys())
-            ws.append(headers)
+            ws.append(headers)  # Add headers as the first row
             # Sort entries by 'Date' column before appending to worksheet
             entries.sort(key=lambda x: x[1]['Date'])
-            for workbook, row in entries:
-                ws.append(list(row.values()))
-        
+            for row_index, (workbook, row) in enumerate(entries, start=2):  # Start from row 2 (after headers)
+                ws.append(list(row.values()))  # Append row data
+                # Insert image from the first thumbnail column into a new column 'B'
+                thumbnail_url = row.get(thumbnail_column)
+                if thumbnail_url and row_index == 2:  # Only insert the first image
+                    insert_image_from_url(ws, thumbnail_url, row_index)
+
         # Adjust column widths to fit content
         adjust_column_widths(ws)
-
-        # Manually adjust the width of the 'Date' column
-        date_column_letter = ws.cell(row=1, column=1).column_letter
-        ws.column_dimensions[date_column_letter].width = 15  # Adjust width based on your date format
 
     output_file = os.path.join(directory, 'report.xlsx')
     output_wb.save(output_file)
