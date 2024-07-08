@@ -1,7 +1,8 @@
 import glob
 import os
 from openpyxl import load_workbook, Workbook
-from openpyxl.drawing.image import Image
+from openpyxl.drawing.image import Image as XLImage
+from PIL import Image as PILImage
 from openpyxl.utils import get_column_letter
 from datetime import datetime
 from collections import defaultdict
@@ -77,14 +78,27 @@ def adjust_column_widths(ws):
         col_letter = col[0].column_letter
         ws.column_dimensions[col_letter].width = adjusted_width
 
+def calculate_resized_dimensions(original_width, original_height, max_width, max_height):
+    ratio = min(max_width / original_width, max_height / original_height)
+    return int(original_width * ratio), int(original_height * ratio)
+
 def insert_image_from_url(ws, url, row_index, image_width=320, image_height=240):
     try:
         response = requests.get(url)
-        img = Image(BytesIO(response.content))
-        img.width = image_width
-        img.height = image_height
-        img.anchor = f'B{row_index}'  # Position image in column 'B', adjust as needed
-        ws.add_image(img)
+        image_data = BytesIO(response.content)
+        img_pil = PILImage.open(image_data)
+
+        max_width = 400  # Maximum width
+        max_height = 300  # Maximum height
+        resized_width, resized_height = calculate_resized_dimensions(img_pil.width, img_pil.height, max_width, max_height)
+
+        img_pil = img_pil.resize((resized_width, resized_height), PILImage.LANCZOS)
+        img_bytes = BytesIO()
+        img_pil.save(img_bytes, format='PNG')
+        img_xl = XLImage(img_bytes)
+        cell = ws.cell(row=1, column=1)
+        ws.add_image(img_xl, cell.coordinate)
+        ws.column_dimensions["A"].width = 400 / 7
     except Exception as e:
         print(f"Error inserting image from {url}: {e}")
 
@@ -105,12 +119,12 @@ if __name__ == "__main__":
         sheet_title = sanitize_sheet_title(f"{ordinal_number}_{thumbnail}")
         ws = output_wb.create_sheet(title=sheet_title)
         if entries:
-            headers = list(entries[0][1].keys())
+            headers = ['img'] + list(entries[0][1].keys())
             ws.append(headers)  # Add headers as the first row
             # Sort entries by 'Date' column before appending to worksheet
             entries.sort(key=lambda x: x[1]['Date'])
             for row_index, (workbook, row) in enumerate(entries, start=2):  # Start from row 2 (after headers)
-                ws.append(list(row.values()))  # Append row data
+                ws.append([''] + list(row.values()))  # Append row data
                 # Insert image from the first thumbnail column into a new column 'B'
                 thumbnail_url = row.get(thumbnail_column)
                 if thumbnail_url and row_index == 2:  # Only insert the first image

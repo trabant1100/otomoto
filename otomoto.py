@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image as XLImage
+from openpyxl.utils import get_column_letter
 from io import BytesIO
 from PIL import Image as PILImage
 from datetime import date
@@ -47,13 +48,34 @@ def calculate_resized_dimensions(original_width, original_height, max_width, max
     ratio = min(max_width / original_width, max_height / original_height)
     return int(original_width * ratio), int(original_height * ratio)
 
+def resize_column_to_fit_text(ws, column_letter):
+    """
+    Resizes the specified column in the given worksheet to fit the text content.
+    
+    :param ws: The worksheet object.
+    :param column_letter: The column letter (e.g., 'A', 'B') to resize.
+    """
+    max_length = 0
+    for row in ws.iter_rows():
+        for cell in row:
+            if cell.column_letter == column_letter and cell.value:
+                max_length = max(max_length, len(str(cell.value)))
+    
+    # Adding extra space for padding
+    adjusted_width = max_length + 2
+
+    # Set the column width
+    ws.column_dimensions[column_letter].width = adjusted_width
+
+
 # Create a workbook and a sheet
 wb = Workbook()
 ws = wb.active
 ws.title = "otomoto"
 
 # Add some data
-ws.append(['thumbnail', 'title', 'url', "description", "location", "mileage", "price"])
+header = ["thumbnail", "title", "url", "description", "location", "mileage", "price"]
+ws.append(header)
 for idx, item in enumerate(results):
 	ws.append(list(item.values()))
 	response = requests.get(item.get("thumbnail"))
@@ -70,9 +92,11 @@ for idx, item in enumerate(results):
 	img_xl = XLImage(img_bytes)
 	cell = ws.cell(row=(idx+2), column=1)
 	ws.add_image(img_xl, cell.coordinate)
-	if idx > 0:
-		ws.row_dimensions[idx+1].height = 250
-		ws.column_dimensions["A"].width = 400 / 7
+	ws.row_dimensions[idx+2].height = 250
+	ws.column_dimensions["A"].width = 400 / 7
+
+for idx in range(1, len(header)):
+	resize_column_to_fit_text(ws, get_column_letter(idx + 1))
 
 
 # Save the workbook to a file
