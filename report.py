@@ -10,6 +10,32 @@ import re
 import requests
 from io import BytesIO
 
+banned_urls = [
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-2-3-ecoboost-303km-2020-ID6GsaaA.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-7-miejsc-suv-w-doskonalym-stanie-ID6Gnm35.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-maly-przebieg-jak-nowy-piekne-duze-auto-7-osob-ID6GwFMg.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3t-300ps-zobacz-jak-nowy-ostrowek1-ID6FFCfy.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2300cm-benzyna-przywieziony-z-ameryki-doskonaly-stan-ID6GpSqb.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3l-benzyna-awd-automat-wer-xlt-ID6GueJE.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-290km-limited-rwd-faktura-vat23-ID6Gku4R.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ID6GwYvH.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-4x4-2-3-ecoboost-303-km-ID6FBW60.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2020-pojemnosc-2-3l-4x4-ID6GuyVP.html'
+]
+
+fav_urls = [
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-400km-ID6GqSpp.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400km-super-stan-biala-masaze-navi-4x4-ID6GvrtU.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-ID6GazcR.html'
+]
+
+dead_urls = [
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html'
+]
+
 def read_all_excel_files_to_dict(directory, extension):
     if not extension.startswith('.'):
         extension = '.' + extension
@@ -53,7 +79,7 @@ def group_by_thumbnail(all_workbooks_data, thumbnail_column):
     
     return grouped_data
 
-def sanitize_sheet_title(title, max_length=31):
+def sanitize_sheet_title(title, max_length=30):
     # Replace invalid characters with underscores or remove them
     sanitized_title = re.sub(r'[\\/*?[\]:]', '_', title)
     # Ensure the title is no longer than the maximum allowed length
@@ -96,9 +122,8 @@ def insert_image_from_url(ws, url, row_index, image_width=320, image_height=240)
         img_bytes = BytesIO()
         img_pil.save(img_bytes, format='PNG')
         img_xl = XLImage(img_bytes)
-        cell = ws.cell(row=1, column=1)
+        cell = ws.cell(row=2, column=1)
         ws.add_image(img_xl, cell.coordinate)
-        ws.column_dimensions["A"].width = 400 / 7
     except Exception as e:
         print(f"Error inserting image from {url}: {e}")
 
@@ -116,22 +141,38 @@ if __name__ == "__main__":
 
     for idx, (thumbnail, entries) in enumerate(grouped_data.items(), start=1):
         ordinal_number = ordinal(idx)
-        sheet_title = sanitize_sheet_title(f"{ordinal_number}_{thumbnail}")
-        ws = output_wb.create_sheet(title=sheet_title)
+        desc = entries[0][1]['description']
+        url = entries[0][1]['url']
+        if url in banned_urls:
+            desc = f"ZZZ{desc}"
+        sheet_title = sanitize_sheet_title(f"{desc}")
+        ws = output_wb.create_sheet(title=f"{idx}")
+        if url in banned_urls:
+            ws.sheet_state = 'hidden'
+        if url in dead_urls:
+            ws.sheet_properties.tabColor = 'FF0000'
+        if url in fav_urls:
+            ws.sheet_properties.tabColor = '00FF00'    
         if entries:
-            headers = ['img'] + list(entries[0][1].keys())
+            headers = ['img', 'price'] + list(entries[0][1].keys())
             ws.append(headers)  # Add headers as the first row
             # Sort entries by 'Date' column before appending to worksheet
             entries.sort(key=lambda x: x[1]['Date'])
             for row_index, (workbook, row) in enumerate(entries, start=2):  # Start from row 2 (after headers)
-                ws.append([''] + list(row.values()))  # Append row data
+                ws.append(['', row['price']] + list(row.values()))  # Append row data
                 # Insert image from the first thumbnail column into a new column 'B'
                 thumbnail_url = row.get(thumbnail_column)
                 if thumbnail_url and row_index == 2:  # Only insert the first image
                     insert_image_from_url(ws, thumbnail_url, row_index)
+            if row_index == 2:
+                ws.sheet_properties.tabColor = 'FFA500'
 
         # Adjust column widths to fit content
         adjust_column_widths(ws)
+        ws.column_dimensions["A"].width = 400 / 7
+        ws.column_dimensions["D"].width = 20
+        ws.column_dimensions["F"].width = 20
+        ws['F2'].hyperlink = url
 
     output_file = os.path.join(directory, 'report.xlsx')
     output_wb.save(output_file)
