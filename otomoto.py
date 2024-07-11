@@ -1,3 +1,4 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
@@ -7,10 +8,12 @@ from io import BytesIO
 from PIL import Image as PILImage
 from datetime import date
 
+with open("config.json", "r") as file:
+	config = json.load(file)
+	URL = config["listing_url"]
 
 output = date.today().strftime("%d.%m.%Y") + ".xlsx"
 results = []
-URL = "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020&search%5Badvanced_search_expanded%5D=false"
 page = requests.get(URL)
 
 soap = BeautifulSoup(page.content, "html.parser")

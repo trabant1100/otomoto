@@ -1,5 +1,6 @@
 import glob
 import os
+import json
 from openpyxl import load_workbook, Workbook
 from openpyxl.drawing.image import Image as XLImage
 from PIL import Image as PILImage
@@ -10,37 +11,12 @@ import re
 import requests
 from io import BytesIO
 
-banned_urls = [
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-2-3-ecoboost-303km-2020-ID6GsaaA.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-7-miejsc-suv-w-doskonalym-stanie-ID6Gnm35.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-maly-przebieg-jak-nowy-piekne-duze-auto-7-osob-ID6GwFMg.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3t-300ps-zobacz-jak-nowy-ostrowek1-ID6FFCfy.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2300cm-benzyna-przywieziony-z-ameryki-doskonaly-stan-ID6GpSqb.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3l-benzyna-awd-automat-wer-xlt-ID6GueJE.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-290km-limited-rwd-faktura-vat23-ID6Gku4R.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ID6GwYvH.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-4x4-2-3-ecoboost-303-km-ID6FBW60.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2020-pojemnosc-2-3l-4x4-ID6GuyVP.html'
-]
-
-crashed_urls = [
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-4x4-400hp-ID6GvgM5.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-fv23-leasing-ID6GzGhZ.html'
-]
-
-fav_urls = [
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-400km-ID6GqSpp.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400km-super-stan-biala-masaze-navi-4x4-ID6GvrtU.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-ID6GazcR.html'
-]
-
-dead_urls = [
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html',
-    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html'
-]
+with open("config.json", "r") as file:
+    report_config = json.load(file)["report"]
+    banned_urls = report_config["banned_urls"]
+    crashed_urls = report_config["crashed_urls"]
+    fav_urls = report_config["fav_urls"]
+    dead_urls = report_config["dead_urls"]
 
 def read_all_excel_files_to_dict(directory, extension):
     if not extension.startswith('.'):
