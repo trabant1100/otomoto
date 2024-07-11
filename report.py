@@ -23,6 +23,12 @@ banned_urls = [
     'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2020-pojemnosc-2-3l-4x4-ID6GuyVP.html'
 ]
 
+crashed_urls = [
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-4x4-400hp-ID6GvgM5.html',
+    'https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-fv23-leasing-ID6GzGhZ.html'
+]
+
 fav_urls = [
     'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html',
     'https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-400km-ID6GqSpp.html',
@@ -147,10 +153,10 @@ if __name__ == "__main__":
             desc = f"ZZZ{desc}"
         sheet_title = sanitize_sheet_title(f"{desc}")
         ws = output_wb.create_sheet(title=f"{idx}")
-        if url in banned_urls:
+        if url in banned_urls or url in crashed_urls:
             ws.sheet_state = 'hidden'
         if url in dead_urls:
-            ws.sheet_properties.tabColor = 'FF0000'
+            ws.sheet_properties.tabColor = 'D3D3D3'
         if url in fav_urls:
             ws.sheet_properties.tabColor = '00FF00'    
         if entries:
