@@ -36,12 +36,16 @@ for article in articles:
 				result["location"] = dls[1].dd.p.string
 			if div.h3:
 				result["price"] = div.h3.string
+		if result.get("thumbnail") is None:
+			img = article.section.div.find("img")
+			result["thumbnail"] = img["src"]
 
 	if result:
 		results.append(result)
 		
 for idx, item in enumerate(results):
-	print(idx, item.get("thumbnail"), item.get("title"), item.get("url"), item.get("description"), item.get("location"), item.get("mileage"), item.get("price"))	
+	print(idx, item.get("thumbnail"), item.get("description"), item.get("title"), 
+		item.get("url"), item.get("description"), item.get("location"), item.get("mileage"), item.get("price"))	
 
 
 def calculate_resized_dimensions(original_width, original_height, max_width, max_height):
@@ -77,7 +81,8 @@ ws.title = "otomoto"
 header = ["thumbnail", "title", "url", "description", "location", "mileage", "price"]
 ws.append(header)
 for idx, item in enumerate(results):
-	ws.append(list(item.values()))
+	values = list(map(lambda h: item[h], header))
+	ws.append(values)
 	response = requests.get(item.get("thumbnail"))
 	image_data = BytesIO(response.content)
 	img_pil = PILImage.open(image_data)
