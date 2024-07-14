@@ -5,7 +5,7 @@ from openpyxl import load_workbook, Workbook
 from openpyxl.drawing.image import Image as XLImage
 from PIL import Image as PILImage
 from openpyxl.utils import get_column_letter
-from datetime import datetime
+from datetime import datetime, date
 from collections import defaultdict
 import re
 import requests
@@ -156,6 +156,6 @@ if __name__ == "__main__":
         ws.column_dimensions["F"].width = 20
         ws['F2'].hyperlink = url
 
-    output_file = os.path.join(directory, 'report.xlsx')
+    output_file = date.today().strftime("%d.%m.%Y") + " report.xlsx"  
     output_wb.save(output_file)
     print(f"Data written to {output_file}")
