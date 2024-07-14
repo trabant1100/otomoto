@@ -39,7 +39,7 @@ jobs:
       - name: generate directory listing
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
-          FOLDER: report
+          FOLDER: .
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
