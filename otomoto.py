@@ -9,10 +9,11 @@ from PIL import Image as PILImage
 from datetime import date
 
 with open("config.json", "r") as file:
-	config = json.load(file)
-	URL = config["listing_url"]
+	config = json.load(file)["listing"]
+	DIR = config["dir"]
+	URL = config["url"]
 
-output = date.today().strftime("%d.%m.%Y") + ".xlsx"
+output = DIR + "/" + date.today().strftime("%d.%m.%Y") + ".xlsx"
 results = []
 page = requests.get(URL)
 

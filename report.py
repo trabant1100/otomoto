@@ -12,7 +12,10 @@ import requests
 from io import BytesIO
 
 with open("config.json", "r") as file:
-    report_config = json.load(file)["report"]
+    config = json.load(file)
+    listing_config = config["listing"]
+    report_config = config["report"]
+    DIR = report_config["dir"]
     banned_urls = report_config["banned_urls"]
     crashed_urls = report_config["crashed_urls"]
     fav_urls = report_config["fav_urls"]
@@ -110,7 +113,7 @@ def insert_image_from_url(ws, url, row_index, image_width=320, image_height=240)
         print(f"Error inserting image from {url}: {e}")
 
 if __name__ == "__main__":
-    directory = os.getcwd()  # Set to the current directory
+    directory = listing_config["dir"]
     extension = 'xlsx'
     thumbnail_column = 'thumbnail'  # Replace with your actual column name for thumbnails
 
@@ -156,6 +159,6 @@ if __name__ == "__main__":
         ws.column_dimensions["F"].width = 20
         ws['F2'].hyperlink = url
 
-    output_file = date.today().strftime("%d.%m.%Y") + " report.xlsx"  
+    output_file = DIR + "/" + date.today().strftime("%d.%m.%Y") + " report.xlsx"  
     output_wb.save(output_file)
     print(f"Data written to {output_file}")

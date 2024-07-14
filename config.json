@@ -1,7 +1,12 @@
 {
-    "listing_url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020&search%5Badvanced_search_expanded%5D=false",
+    "listing":
+    {
+        "dir": "listing",
+        "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020&search%5Badvanced_search_expanded%5D=false"
+    },
     "report":
     {
+        "dir": "report",
         "banned_urls":
         [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-2-3-ecoboost-303km-2020-ID6GsaaA.html",
