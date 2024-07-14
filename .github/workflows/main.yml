@@ -29,6 +29,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Automatic report generated
+          file_pattern: '*.xlsx'
   pages-directory-listing:
     runs-on: ubuntu-latest
     name: directory listing index
@@ -60,4 +61,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-          file_pattern: '*.xlsx'
