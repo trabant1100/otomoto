@@ -43,6 +43,7 @@ async function createHtml(imagesDir, fullFilename) {
 			<h3>${auction.price} PLN</h3>
 			<h3>${auction.location}</h3>
 			<h3>${auction.mileage}</h3>
+			<p style="white-space: preserve-breaks;">${auction.fullDescription}</p>
 			${imgHtml}
 		</body>
 		</html>

@@ -74,7 +74,13 @@ async function getAuctionDetails(url) {
 		const date = jqSectionDiv.children('div').eq(0).children('p').text();
 		const id = jqSectionDiv.children('div').eq(1).children('p').text().replace(/^ID\s*:\s*/, '');
 
-		resolve({ title, description, price, date, id, imgUrls });
+		const fullDescription = jqMainDiv.children('section').eq(1).children('div[data-testid=content-description-section]')
+			.find('p')
+			.toArray()
+			.map(p => $(p).text())
+			.join('\n');
+
+		resolve({ title, description, fullDescription, price, date, id, imgUrls });
 	});
 }
 
@@ -88,6 +94,10 @@ function saveImagesFromAuction(dir, auction) {
 }
 
 async function saveImage(url, filename) {
-	const { data } = await axios.get(url, { responseType: 'arraybuffer' });
-	return fs.writeFile(filename, data);
+	try {
+		const { data } = await axios.get(url, { responseType: 'arraybuffer' });
+		return fs.writeFile(filename, data);
+	} catch(e) {
+		console.error(e);
+	}
 }
