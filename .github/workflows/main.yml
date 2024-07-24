@@ -29,8 +29,24 @@ jobs:
         with:
           commit_message: Automatic listing and report generated
           file_pattern: '*.json, *.html, *.webp'
+  copy-listing-report:
+      needs: generate
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - name: create page dir
+          run: |
+            mkdir github-pages
+        - name: copy listings
+          run: |
+            cp -r listing github-pages
+        - name: copy reports
+          run: |
+            mkdir github-pages/report
+            cp report/*.html github-pages/report
   pages-directory-listing:
-    needs: generate
+    needs: copy-listing-report
     runs-on: ubuntu-latest
     name: directory listing index
     steps:
@@ -43,7 +59,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: '.'
+          path: 'github-pages'
   deploy:
     needs: pages-directory-listing
     permissions:
