@@ -18,13 +18,15 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-290km-limited-rwd-faktura-vat23-ID6Gku4R.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ID6GwYvH.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-4x4-2-3-ecoboost-303-km-ID6FBW60.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2020-pojemnosc-2-3l-4x4-ID6GuyVP.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2020-pojemnosc-2-3l-4x4-ID6GuyVP.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-280km-automat-skora-kamera-nawi-alu-fv23-ID6G6Sq9.html"
         ],
         "crashed_urls":
         [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-4x4-400hp-ID6GvgM5.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-fv23-leasing-ID6GzGhZ.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-fv23-leasing-ID6GzGhZ.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-4x4-400hp-ID6GAPcU.html"
         ],
         "fav_urls":
         [
@@ -32,12 +34,13 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-400km-ID6GqSpp.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400km-super-stan-biala-masaze-navi-4x4-ID6GvrtU.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-ID6GazcR.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-ID6GazcR.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html"
         ],
         "dead_urls":
         [
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html"
+            
         ]
     }
 }
