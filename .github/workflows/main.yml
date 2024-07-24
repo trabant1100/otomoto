@@ -35,6 +35,8 @@ jobs:
       permissions:
         contents: write
       steps:
+        - name: checkout repository
+          uses: actions/checkout@v3
         - name: create page dir
           run: |
             mkdir github-pages
