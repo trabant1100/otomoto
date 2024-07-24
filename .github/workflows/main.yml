@@ -43,7 +43,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'report'
+          path: '.'
   deploy:
     needs: pages-directory-listing
     permissions:
