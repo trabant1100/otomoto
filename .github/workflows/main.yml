@@ -29,31 +29,23 @@ jobs:
         with:
           commit_message: Automatic listing and report generated
           file_pattern: '*.json, *.html, *.webp'
-  copy-listing-report:
-      needs: generate
-      runs-on: ubuntu-latest
-      permissions:
-        contents: write
-      steps:
-        - name: checkout repository
-          uses: actions/checkout@v3
-        - name: create page dir
-          run: |
-            mkdir github-pages
-        - name: copy listings
-          run: |
-            cp -r listing github-pages
-        - name: copy reports
-          run: |
-            mkdir github-pages/report
-            cp report/*.html github-pages/report
   pages-directory-listing:
-    needs: copy-listing-report
+    needs: generate
     runs-on: ubuntu-latest
     name: directory listing index
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
+      - name: create page dir
+          run: |
+            mkdir github-pages
+      - name: copy listings
+        run: |
+          cp -r listing github-pages
+      - name: copy reports
+        run: |
+          mkdir github-pages/report
+          cp report/*.html github-pages/report
       - name: generate directory listing
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
