@@ -4,10 +4,10 @@ const format = require('date-format');
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls } = config.report;
+	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, vins } = config.report;
 	const today = format.asString('dd.MM.yyyy', new Date());
 
-	const report = await generateReport(today, listingDir);
+	const report = await generateReport(today, vins, listingDir);
 	console.log('Writing report json');
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
 
@@ -16,7 +16,7 @@ const format = require('date-format');
 	await fs.writeFile(`${reportDir}/${today}.html`, html);
 })();
 
-async function generateReport(today, rootDir) {
+async function generateReport(today, vins, rootDir) {
 	const listingDirs = [];
 	for (const filename of await fs.readdir(rootDir)) {
 		const fullFilename = `${rootDir}/${filename}`;
@@ -58,6 +58,9 @@ async function generateReport(today, rootDir) {
 		if (snapshots.at(-1).snapshotDate != today) {
 			auction.ended = true;
 		}
+		if (vins[snapshots[0].url] !== undefined) {
+			auction.vin = vins[snapshots[0].url];
+		}
 	}
 
 	return report;
@@ -87,10 +90,17 @@ function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, dead
 		if (auction.ended) {
 			auctionClasses.push('ended');
 		}
+		const vinHtml = auction.vin !== undefined 
+			? `VIN: <a href="https://www.google.com/search?q=${auction.vin}" target="_blank">${auction.vin}</a>`
+			: '';
 		rowsHtml += `
 				<tr class="${auctionClasses.join(' ')}">
 					<td rowspan="${snapshots.length + 1}"><img src="${snapshots[0].imgUrls[0]}" width="128"></td>
-					<td colspan="${header.length - 1}">${snapshots[0].description} <a href="${snapshots[0].url}" target="_blank">otomoto</a></td>
+					<td colspan="${header.length - 1}">
+						${snapshots[0].description}
+						<a href="${snapshots[0].url}" target="_blank">otomoto</a>
+						${vinHtml}
+					</td>
 				</tr>
 			`;		
 		for (const auction of snapshots) {
