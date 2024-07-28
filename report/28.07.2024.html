@@ -16,10 +16,16 @@
 
 				.banned {
 					display: none;
+					background-color: lightblue;
 				}
 
 				.crashed {
 					display: none;
+				}
+
+				.banned.visible,
+				.crashed.visible {
+					display: table-row;
 				}
 
 				.fav {
@@ -29,10 +35,18 @@
 				.dead {
 					background-color: lightgray;
 				}
+
+				.ended {
+					background-color: lightgray;
+				}
 			</style>
+			<script>
+
+			</script>
 		<title>Report</title>
 		</head>
 		<body>
+			<input type="checkbox" id="banned" autocomplete="off"><label for="banned">Banned</label>
 			<table>
 				<thead>
 					<tr>
@@ -56,31 +70,31 @@
 					<td colspan="5">2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3t-300ps-zobacz-jak-nowy-ostrowek1-ID6FFCfy.html" target="_blank">otomoto</a></td>
 				</tr>
 			<tr class="banned"><td><a href="../listing/21.07.2024/6112545252.html">21.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/22.07.2024/6112545252.html">22.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/23.07.2024/6112545252.html">23.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/24.07.2024/6112545252.html">24.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/25.07.2024/6112545252.html">25.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/26.07.2024/6112545252.html">26.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/27.07.2024/6112545252.html">27.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr><tr class="banned"><td><a href="../listing/28.07.2024/6112545252.html">28.07.2024</a></td><td>156 900</td><td>2020 · 5 700 km · 2 261 cm3 · Benzyna Do negocjacji</td><td>Zduńska Wola (Łódzkie)</td><td>5 700 km</td></tr>
-				<tr class="fav">
+				<tr class="fav ended">
 					<td rowspan="5"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InE1bzNoZm96N2FiaC1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.aXZ13ickcNbiJm65Ff-0qYS47-klVt1hhZUoFjB4MFw/image" width="128"></td>
 					<td colspan="5">2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html" target="_blank">otomoto</a></td>
 				</tr>
-			<tr class="fav"><td><a href="../listing/21.07.2024/6114952748.html">21.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav"><td><a href="../listing/22.07.2024/6114952748.html">22.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav"><td><a href="../listing/23.07.2024/6114952748.html">23.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav"><td><a href="../listing/24.07.2024/6114952748.html">24.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr>
+			<tr class="fav ended"><td><a href="../listing/21.07.2024/6114952748.html">21.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav ended"><td><a href="../listing/22.07.2024/6114952748.html">22.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav ended"><td><a href="../listing/23.07.2024/6114952748.html">23.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr><tr class="fav ended"><td><a href="../listing/24.07.2024/6114952748.html">24.07.2024</a></td><td>234 500</td><td>2020 · 24 500 km · 2 998 cm3 · Benzyna Do negocjacji</td><td>Białystok (Podlaskie)</td><td>24 500 km</td></tr>
 				<tr class="banned">
 					<td rowspan="9"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6Imt5cWlyaGRqb21vcS1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsImEiOiIwIiwicCI6IjEwLC0xMCJ9XX0.jrySvrDJF1f_r-sZdQ34vBKqNvp7HPvni4rwPsS1GaU/image" width="128"></td>
 					<td colspan="5">2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-280km-automat-skora-kamera-nawi-alu-fv23-ID6G6Sq9.html" target="_blank">otomoto</a></td>
 				</tr>
 			<tr class="banned"><td><a href="../listing/21.07.2024/6119042269.html">21.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/22.07.2024/6119042269.html">22.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Tak</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/23.07.2024/6119042269.html">23.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/24.07.2024/6119042269.html">24.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/25.07.2024/6119042269.html">25.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/26.07.2024/6119042269.html">26.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/27.07.2024/6119042269.html">27.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr><tr class="banned"><td><a href="../listing/28.07.2024/6119042269.html">28.07.2024</a></td><td>179 900</td><td>2020 · 30 096 km · 2 264 cm3 · Benzyna Do negocjacji, Faktura VAT</td><td>Toruń (Kujawsko-pomorskie)</td><td>30 096 km</td></tr>
-				<tr class="fav">
+				<tr class="fav ended">
 					<td rowspan="6"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InA0dGVyeTF0d2JkMTEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.eQmfhSXoxlG2CJh3mraBpd0Qc4GHYN-b8jc0wJK6odc/image" width="128"></td>
 					<td colspan="5">2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in  <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-ID6GazcR.html" target="_blank">otomoto</a></td>
 				</tr>
-			<tr class="fav"><td><a href="../listing/21.07.2024/6119921721.html">21.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav"><td><a href="../listing/22.07.2024/6119921721.html">22.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav"><td><a href="../listing/23.07.2024/6119921721.html">23.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav"><td><a href="../listing/24.07.2024/6119921721.html">24.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav"><td><a href="../listing/25.07.2024/6119921721.html">25.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr>
+			<tr class="fav ended"><td><a href="../listing/21.07.2024/6119921721.html">21.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav ended"><td><a href="../listing/22.07.2024/6119921721.html">22.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav ended"><td><a href="../listing/23.07.2024/6119921721.html">23.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav ended"><td><a href="../listing/24.07.2024/6119921721.html">24.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr><tr class="fav ended"><td><a href="../listing/25.07.2024/6119921721.html">25.07.2024</a></td><td>210 000</td><td>2020 · 29 818 km · 2 998 cm3 · Hybryda Plug-in </td><td>Nawojowa Góra (Małopolskie)</td><td>29 818 km</td></tr>
 				<tr class="banned">
 					<td rowspan="9"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InhpaTlmZHRuM3pnaTEtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.pb4HonyFHkaFsrzv9o6sO1z4QfHnap3s1jHyzL0bnJk/image" width="128"></td>
 					<td colspan="5">2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-290km-limited-rwd-faktura-vat23-ID6Gku4R.html" target="_blank">otomoto</a></td>
 				</tr>
 			<tr class="banned"><td><a href="../listing/21.07.2024/6122285285.html">21.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/22.07.2024/6122285285.html">22.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Tak</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/23.07.2024/6122285285.html">23.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/24.07.2024/6122285285.html">24.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/25.07.2024/6122285285.html">25.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/26.07.2024/6122285285.html">26.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/27.07.2024/6122285285.html">27.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr><tr class="banned"><td><a href="../listing/28.07.2024/6122285285.html">28.07.2024</a></td><td>179 000</td><td>2020 · 55 500 km · 3 340 cm3 · Hybryda Do negocjacji, Faktura VAT</td><td>Nowy Sącz (Małopolskie)</td><td>55 500 km</td></tr>
-				<tr class="banned">
+				<tr class="banned ended">
 					<td rowspan="5"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6InRzcW5vdWs0bGRyZzMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.zNbpKOQ4UWHwXNbW3obJgjHE4Lnv85_tCUm9PA884Sk/image" width="128"></td>
 					<td colspan="5">2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in  <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-7-miejsc-suv-w-doskonalym-stanie-ID6Gnm35.html" target="_blank">otomoto</a></td>
 				</tr>
-			<tr class="banned"><td><a href="../listing/21.07.2024/6122969407.html">21.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned"><td><a href="../listing/22.07.2024/6122969407.html">22.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned"><td><a href="../listing/23.07.2024/6122969407.html">23.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned"><td><a href="../listing/24.07.2024/6122969407.html">24.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr>
+			<tr class="banned ended"><td><a href="../listing/21.07.2024/6122969407.html">21.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned ended"><td><a href="../listing/22.07.2024/6122969407.html">22.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned ended"><td><a href="../listing/23.07.2024/6122969407.html">23.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr><tr class="banned ended"><td><a href="../listing/24.07.2024/6122969407.html">24.07.2024</a></td><td>129 000</td><td>2020 · 62 000 km · 2 998 cm3 · Hybryda Plug-in </td><td>Łomianki (Mazowieckie)</td><td>62 000 km</td></tr>
 				<tr class="banned">
 					<td rowspan="9"><img src="https://ireland.apollo.olxcdn.com/v1/files/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbiI6IjRxZGNtYjZ6eGdvcDMtT1RPTU9UT1BMIiwidyI6W3siZm4iOiJ3ZzRnbnFwNnkxZi1PVE9NT1RPUEwiLCJzIjoiMTYiLCJhIjoiMCIsInAiOiIxMCwtMTAifV19.F-uIF2zG1Rg9wfIsSy4RUrYqOltAWxOipcuf3FjCLbo/image" width="128"></td>
 					<td colspan="5">2020 · 72 800 km · 2 998 cm3 · Hybryda Plug-in  <a href="https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-2-3-ecoboost-303km-2020-ID6GsaaA.html" target="_blank">otomoto</a></td>
@@ -134,5 +148,15 @@
 				</tbody>
 			</table>
 		</body>
+		<script>
+			const toggles = Array.from(document.getElementsByTagName('input')).filter(el => el.type == 'checkbox');
+			for (const toggle of toggles) {
+				toggle.addEventListener('change', ({ target }) => {
+					const { checked } = target;
+					const rows = Array.from(document.getElementsByClassName(target.id));
+					rows.forEach(row => checked ? row.classList.add('visible') : row.classList.remove('visible'));
+				});
+			}
+		</script>
 		</html>
 	

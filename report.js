@@ -7,7 +7,7 @@ const format = require('date-format');
 	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls } = config.report;
 	const today = format.asString('dd.MM.yyyy', new Date());
 
-	const report = await generateReport(listingDir);
+	const report = await generateReport(today, listingDir);
 	console.log('Writing report json');
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
 
@@ -16,7 +16,7 @@ const format = require('date-format');
 	await fs.writeFile(`${reportDir}/${today}.html`, html);
 })();
 
-async function generateReport(rootDir) {
+async function generateReport(today, rootDir) {
 	const listingDirs = [];
 	for (const filename of await fs.readdir(rootDir)) {
 		const fullFilename = `${rootDir}/${filename}`;
@@ -45,10 +45,18 @@ async function generateReport(rootDir) {
 				const auction = JSON.parse(await fs.readFile(fullFilename));
 				auction.snapshotDate = listingDir;
 				if (report[auction.id] === undefined) {
-					report[auction.id] = [];
+					report[auction.id] = { snapshots: [] };
 				}
-				report[auction.id].push(auction);
+				report[auction.id].snapshots.push(auction);
 			}
+		}
+	}
+
+	for (const auctionId in report) {
+		const auction = report[auctionId];
+		const snapshots = auction.snapshots;
+		if (snapshots.at(-1).snapshotDate != today) {
+			auction.ended = true;
 		}
 	}
 
@@ -61,27 +69,31 @@ function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, dead
 
 	let rowsHtml = '';
 	for (const auctionId in report) {
-		const auctions = report[auctionId];
+		const auction = report[auctionId];
+		const snapshots = auction.snapshots;
 		let auctionClasses = [];
-		if (bannedUrls.includes(auctions[0].url)) {
+		if (bannedUrls.includes(snapshots[0].url)) {
 			auctionClasses.push('banned');
 		}
-		if (crashedUrls.includes(auctions[0].url)) {
+		if (crashedUrls.includes(snapshots[0].url)) {
 			auctionClasses.push('crashed');
 		}
-		if (favUrls.includes(auctions[0].url)) {
+		if (favUrls.includes(snapshots[0].url)) {
 			auctionClasses.push('fav');
 		}
-		if (deadUrls.includes(auctions[0].url)) {
+		if (deadUrls.includes(snapshots[0].url)) {
 			auctionClasses.push('dead');
+		}
+		if (auction.ended) {
+			auctionClasses.push('ended');
 		}
 		rowsHtml += `
 				<tr class="${auctionClasses.join(' ')}">
-					<td rowspan="${auctions.length + 1}"><img src="${auctions[0].imgUrls[0]}" width="128"></td>
-					<td colspan="${header.length - 1}">${auctions[0].description} <a href="${auctions[0].url}" target="_blank">otomoto</a></td>
+					<td rowspan="${snapshots.length + 1}"><img src="${snapshots[0].imgUrls[0]}" width="128"></td>
+					<td colspan="${header.length - 1}">${snapshots[0].description} <a href="${snapshots[0].url}" target="_blank">otomoto</a></td>
 				</tr>
 			`;		
-		for (const auction of auctions) {
+		for (const auction of snapshots) {
 			const cells = [auction.snapshotDate, auction.price, auction.description, auction.location, auction.mileage];
 			cells[0] = `<a href="../${listingDir}/${auction.snapshotDate}/${auction.id}.html">` + cells[0] + '</a>';
 			const cellsHtml = cells.map(str => `<td>` + str + '</td>').join('');
@@ -107,10 +119,16 @@ function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, dead
 
 				.banned {
 					display: none;
+					background-color: lightblue;
 				}
 
 				.crashed {
 					display: none;
+				}
+
+				.banned.visible,
+				.crashed.visible {
+					display: table-row;
 				}
 
 				.fav {
@@ -120,10 +138,18 @@ function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, dead
 				.dead {
 					background-color: lightgray;
 				}
+
+				.ended {
+					background-color: lightgray;
+				}
 			</style>
+			<script>
+
+			</script>
 		<title>Report</title>
 		</head>
 		<body>
+			<input type="checkbox" id="banned" autocomplete="off"><label for="banned">Banned</label>
 			<table>
 				<thead>
 					<tr>
@@ -135,6 +161,16 @@ function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, dead
 				</tbody>
 			</table>
 		</body>
+		<script>
+			const toggles = Array.from(document.getElementsByTagName('input')).filter(el => el.type == 'checkbox');
+			for (const toggle of toggles) {
+				toggle.addEventListener('change', ({ target }) => {
+					const { checked } = target;
+					const rows = Array.from(document.getElementsByClassName(target.id));
+					rows.forEach(row => checked ? row.classList.add('visible') : row.classList.remove('visible'));
+				});
+			}
+		</script>
 		</html>
 	`;
 
