@@ -84,50 +84,6 @@ async function generateReport(today, vins, rootDir) {
 }
 
 async function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls }) {
-	/*const header = ['img', 'date', 'price', 'description', 'location', 'mileage'];
-	const headerHtml = header.map(str => '<th>' + str + '</th>').join('');
-
-	let rowsHtml = '';
-	for (const auctionId in report) {
-		const auction = report[auctionId];
-		const snapshots = auction.snapshots;
-		let auctionClasses = [];
-		if (bannedUrls.includes(snapshots[0].url)) {
-			auctionClasses.push('banned');
-		}
-		if (crashedUrls.includes(snapshots[0].url)) {
-			auctionClasses.push('crashed');
-		}
-		if (favUrls.includes(snapshots[0].url)) {
-			auctionClasses.push('fav');
-		}
-		if (deadUrls.includes(snapshots[0].url)) {
-			auctionClasses.push('dead');
-		}
-		if (auction.ended) {
-			auctionClasses.push('ended');
-		}
-		const vinHtml = auction.vin !== undefined 
-			? `VIN: <a href="https://www.google.com/search?q=${auction.vin}" target="_blank">${auction.vin}</a>`
-			: '';
-		rowsHtml += `
-				<tr class="${auctionClasses.join(' ')}">
-					<td rowspan="${snapshots.length + 1}"><img src="${snapshots[0].imgUrls[0]}" width="128"></td>
-					<td colspan="${header.length - 1}">
-						${snapshots[0].description}
-						<a href="${snapshots[0].url}" target="_blank">otomoto</a>
-						${vinHtml}
-					</td>
-				</tr>
-			`;		
-		for (const auction of snapshots) {
-			const cells = [auction.snapshotDate, auction.price, auction.description, auction.location, auction.mileage];
-			cells[0] = `<a href="../${listingDir}/${auction.snapshotDate}/${auction.id}.html">` + cells[0] + '</a>';
-			const cellsHtml = cells.map(str => `<td>` + str + '</td>').join('');
-			rowsHtml += `<tr class="${auctionClasses.join(' ')}">${cellsHtml}</tr>`;
-		}
-	}*/
-
 	const pugger = pug.compile(await fs.readFile('report.pug'));
 	const fn = {
 		parseDate(str) {
