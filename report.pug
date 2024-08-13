@@ -1,0 +1,45 @@
+mixin snapshotDetail(snapshot)
+	.lastDate
+		a(href=`../listing/${snapshot.snapshotDate}/${snapshot.id}.html`)
+			=new Intl.DateTimeFormat("pl-PL", { day: 'numeric', month: 'long' }).format(fn.parseDate(snapshot.snapshotDate))
+	.price= (new Intl.NumberFormat('pl-PL').format(snapshot.price)) + ' zł'
+
+doctype html
+html(lang="pl")
+	head
+		meta(charset='utf-8')
+		title= 'Report'
+		link(rel='stylesheet', type='text/css', href=`../report.css?${Math.random()}`)
+	body
+		div(class='auctions')
+			each auction, auctionId in report
+				- var firstSnapshot = auction.snapshots[0]
+				- var lastSnapshot = auction.snapshots.at(-1)
+				- var priceChange = Math.round((lastSnapshot.price - firstSnapshot.price) / firstSnapshot.price * 100)
+				- var banned = bannedUrls.includes(lastSnapshot.url) ? 'banned' : ''
+				- var crashed = crashedUrls.includes(lastSnapshot.url) ? 'crashed' : ''
+				- var fav = favUrls.includes(lastSnapshot.url) ? 'fav' : ''
+				- var dead = deadUrls.includes(lastSnapshot.url) ? 'dead' : ''
+				- var ended = auction.ended ? 'ended' : ''
+				- var className = ['auction', banned, crashed, fav, dead, ended].join(' ')
+				div(class=className)
+					- var snapshots = auction.snapshots.toReversed()
+					a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
+					.header
+						.title= lastSnapshot.description
+						.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
+							| #{priceChange}%
+					.location= lastSnapshot.location
+					.details
+						.mileage= lastSnapshot.mileage
+						.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'
+					.history(style=`--snapshots-count: ${snapshots.length-1};`)
+						details
+							summary.snapshot
+								+ snapshotDetail(snapshots[0])
+						.snapshots
+							each snapshot, index in snapshots.splice(1)
+								.snapshot
+									+ snapshotDetail(snapshot)
+								
+
