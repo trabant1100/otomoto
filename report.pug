@@ -21,7 +21,8 @@ html(lang="pl")
 				- var fav = favUrls.includes(lastSnapshot.url) ? 'fav' : ''
 				- var dead = deadUrls.includes(lastSnapshot.url) ? 'dead' : ''
 				- var ended = auction.ended ? 'ended' : ''
-				- var className = ['auction', banned, crashed, fav, dead, ended].join(' ')
+				- var new_ = auction.new ? 'new' : '';
+				- var className = ['auction', banned, crashed, fav, dead, ended, new_].join(' ')
 				div(class=className)
 					- var snapshots = auction.snapshots.toReversed()
 					a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
@@ -29,7 +30,10 @@ html(lang="pl")
 						.title= lastSnapshot.description
 						.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 							| #{priceChange}%
-					.location= lastSnapshot.location
+					.locationVin
+						.location= lastSnapshot.location
+						a.vin(href=`https://www.google.com/search?q=${auction.vin}`, target='_blank')
+							| #{(auction.vin || '').toUpperCase()}
 					.details
 						.mileage= lastSnapshot.mileage
 						.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'

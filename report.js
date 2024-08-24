@@ -75,6 +75,9 @@ async function generateReport(today, vins, rootDir) {
 		if (snapshots.at(-1).snapshotDate != today) {
 			auction.ended = true;
 		}
+		if (snapshots.length == 1 && snapshots[0].snapshotDate == today) {
+			auction.new = true;
+		}
 		if (vins[snapshots[0].url] !== undefined) {
 			auction.vin = vins[snapshots[0].url];
 		}

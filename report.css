@@ -101,8 +101,19 @@ body {
 	margin-right: .2em;
 }
 
-.location {
+.locationVin {
+	display: flex;
+	flex-direction: row;
+}
+
+.locationVin .location {
 	color: #999;
+	flex-grow: 1;
+}
+
+.locationVin a.vin:any-link {
+	color: #999;
+	text-decoration: none;
 }
 
 .details {
