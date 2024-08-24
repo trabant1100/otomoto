@@ -1,9 +1,9 @@
-:root {
+body {
 	--font-size: 2.5rem;
 }
 
 @media screen and (hover: hover) {
-	:root {
+	body {
 		--font-size: 1rem;
 	}
 }
@@ -14,7 +14,28 @@ body {
 	font-size: var(--font-size);
 }
 
+input[type=checkbox] {
+	font: inherit;
+	width: var(--font-size);
+	height: var(--font-size);
+}
+
+#showEnded:checked ~ .auctions {
+	--display-ended: flex;
+}
+
+#showBanned:checked ~ .auctions {
+	--display-banned: flex;
+}
+
+#showCrashed:checked ~ .auctions {
+	--display-crashed: flex;
+}
+
 .auctions {
+	--display-ended: none;
+	--display-banned: none;
+	--display-crashed: none;
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
@@ -29,27 +50,59 @@ body {
 	padding-bottom: .3em;
 }
 
-.auction.banned,
-.auction.crashed {
-	display: none;
+.auction.ended {
+	display: var(--display-ended);
 }
 
-.auction.fav > a.otomotoAuctionLink:any-link {
+.auction.banned {
+	display: var(--display-banned);
+}
+
+.auction.crashed {
+	display: var(--display-crashed);
+}
+
+.auction.fav > a.otomotoAuctionLink:any-link,
+.auction.banned > a.otomotoAuctionLink:any-link,
+.auction.crashed > a.otomotoAuctionLink:any-link,
+.auction.new > a.otomotoAuctionLink:any-link {
 	text-decoration: none;
 }
 
-.auction.fav > a.otomotoAuctionLink:any-link::after {
+.auction.fav > a.otomotoAuctionLink:any-link::after,
+.auction.banned > a.otomotoAuctionLink:any-link::after,
+.auction.crashed > a.otomotoAuctionLink:any-link::after,
+.auction.new > a.otomotoAuctionLink:any-link::after {
 	aspect-ratio: 1/1;
-	background: linear-gradient(135deg, rgba(157,213,58,1) 0%, rgba(128,194,23,1) 50%, transparent 50%, transparent 100%);
+	background: linear-gradient(135deg, var(--color) 0%, var(--color) 50%, transparent 50%, transparent 100%);
 	box-sizing: border-box;
 	color: white;
-	content: '★';
 	display: block;
 	font-size: 200%;
 	line-height: 1.3em;
 	opacity: 80%;
 	padding-left: 0.1em;
 	width: 20%;
+}
+
+.auction.fav > a.otomotoAuctionLink:any-link::after {
+	--color: palegreen;
+	content: '★';
+}
+
+.auction.banned > a.otomotoAuctionLink:any-link::after {
+	--color: darkblue;
+	content: '∞';
+}
+
+.auction.crashed > a.otomotoAuctionLink:any-link::after {
+	--color: crimson;
+	content: '⦸︎';
+}
+
+.auction.new > a.otomotoAuctionLink:any-link::after {
+	--color: orange;
+	content: '!';
 }
 
 .auction.ended {

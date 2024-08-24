@@ -11,6 +11,12 @@ html(lang="pl")
 		title= 'Report'
 		link(rel='stylesheet', type='text/css', href=`../report.css?${Math.random()}`)
 	body
+		input(type='checkbox', id='showEnded')
+		label(for='showEnded') Ended
+		input(type='checkbox', id='showBanned')
+		label(for='showBanned') Banned
+		input(type='checkbox', id='showCrashed')
+		label(for='showCrashed') Crashed
 		div(class='auctions')
 			each auction, auctionId in report
 				- var firstSnapshot = auction.snapshots[0]
