@@ -35,6 +35,25 @@ async function createHtml(imagesDir, fullFilename) {
 		<html lang=pl>
 		<head>
 			<meta charset=utf-8>
+			<style>
+				body {
+					--font-size: 2.5rem;
+				}
+
+				@media screen and (hover: hover) {
+					body {
+						--font-size: 1rem;
+					}
+				}
+
+				body {
+					font-size: var(--font-size);
+				}
+
+				p {
+					white-space: preserve-breaks;
+				}
+			</style>
 		<title>${auction.title}</title>
 		</head>
 		<body>
@@ -43,7 +62,7 @@ async function createHtml(imagesDir, fullFilename) {
 			<h3>${auction.price} PLN</h3>
 			<h3>${auction.location}</h3>
 			<h3>${auction.mileage}</h3>
-			<p style="white-space: preserve-breaks;">${auction.fullDescription}</p>
+			<p>${auction.fullDescription}</p>
 			${imgHtml}
 		</body>
 		</html>
