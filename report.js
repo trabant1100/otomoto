@@ -78,8 +78,10 @@ async function generateReport(today, vins, rootDir) {
 		if (snapshots.length == 1 && snapshots[0].snapshotDate == today) {
 			auction.new = true;
 		}
-		if (vins[snapshots[0].url] !== undefined) {
-			auction.vin = vins[snapshots[0].url];
+		for (const url of snapshots.map(s => s.url)) {
+			if (vins[url] !== undefined) {
+				auction.vin = vins[url];
+			}
 		}
 	}
 
