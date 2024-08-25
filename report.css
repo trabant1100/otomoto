@@ -135,6 +135,11 @@ input[type=checkbox] {
 	flex-grow: 1;
 }
 
+.title .year {
+	color: #222;
+	margin-right: .2em;
+}
+
 .priceChange {
 	color: darkgreen;
 }

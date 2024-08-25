@@ -25,12 +25,23 @@ function normalizeReport(report) {
 	const normalized = JSON.parse(JSON.stringify(report));
 
 	for (const [auctionId, auction] of Object.entries(normalized)) {
+		auction.year = auction.snapshots.at(-1).year ?? 2020;
 		for (const snapshot of auction.snapshots) {
 			snapshot.price = Number.parseInt(snapshot.price.replace(' ', ''));
 		}
 	}
 
-	return normalized;
+	const groupedByYear = [];
+	for (const [auctionId, auction] of Object.entries(normalized)) {
+		groupedByYear[auction.year] = groupedByYear[auction.year] ?? {};
+		groupedByYear[auction.year][auctionId] = auction;
+	}
+
+	return groupedByYear
+		.reduce((acc, group) => {
+			acc = { ...acc, ...group };
+			return acc;
+	}, {});
 }
 
 async function generateReport(today, vins, rootDir) {

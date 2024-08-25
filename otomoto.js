@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	const listingUrl = config.listing.url;
+	const listingUrls = config.listing.urls;
 	const today = format.asString('dd.MM.yyyy', new Date());
 	const auctionsDir = listingDir + '/' + today;
 	const imagesDir = './images';
@@ -14,38 +14,39 @@ const cheerio = require('cheerio');
 	await fs.mkdir(auctionsDir, { recursive: true });
 	await fs.mkdir(imagesDir, { recursive: true });
 
-	console.log('Getting list of auctions');
-	const { data } = await axios.get(listingUrl);
-	const $ = cheerio.load(data);
-	const articles = $('article').toArray();
-	const auctions = [];
+	for (const {url, year} of listingUrls) {
+		console.log(`Listing year ${year}`);
+		console.log('Getting list of auctions');
+		const { data } = await axios.get(url);
+		const $ = cheerio.load(data);
+		const articles = $('article').toArray();
+		const auctions = [];
 
-	let auctionIdx = 0;
-	for (const el of articles) {
-		const jqSection = $(el).children('section');
-		const jqDivs = jqSection.children('div');
+		let auctionIdx = 0;
+		for (const el of articles) {
+			const jqSection = $(el).children('section');
+			const jqDivs = jqSection.children('div');
 
-		const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
-		const url = jqDivs.eq(1).find('h1 a').attr('href');
-		const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
-		const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
+			const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
+			const url = jqDivs.eq(1).find('h1 a').attr('href');
+			const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
+			const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
 
-		if (thumbnailUrl && url) {
-			console.log(`Getting details of auction #${auctionIdx + 1}`);
-			const details = await getAuctionDetails(url);
-			const auction = { thumbnailUrl, url, mileage, location, ...details };
-			auctions.push(auction);
-			auctionIdx++;
+			if (thumbnailUrl && url) {
+				console.log(`Getting details of auction #${auctionIdx + 1}`);
+				const details = await getAuctionDetails(url);
+				const auction = { thumbnailUrl, url, mileage, location, year, ...details };
+				auctions.push(auction);
+				auctionIdx++;
+			}
 		}
 
-
-	}
-
-	for (const [idx, auction] of auctions.entries()) {
-		const auctionJson = JSON.stringify(auction, null, 2);
-		await fs.writeFile(`${auctionsDir}/${auction.id}.json`, auctionJson);
-		console.log(`Saving images auction ${idx + 1}/${auctions.length}`);
-		await saveImagesFromAuction(imagesDir, auction);
+		for (const [idx, auction] of auctions.entries()) {
+			const auctionJson = JSON.stringify(auction, null, 2);
+			await fs.writeFile(`${auctionsDir}/${auction.id}.json`, auctionJson);
+			console.log(`Saving images auction ${idx + 1}/${auctions.length}`);
+			await saveImagesFromAuction(imagesDir, auction);
+		}
 	}
 })();
 
@@ -59,7 +60,7 @@ async function getAuctionDetails(url) {
 		const jqAside = jqMainDiv.children('aside').eq(0);
 		const jqAsideDiv = jqAside.children('div').children('div');
 
-		const title = jqAsideDiv.children('h3').text();
+		const title = jqAsideDiv.children('h1').text();
 		const description = jqAsideDiv.children('p').text();
 		const price = jqAsideDiv.find('div > div > h3').text();
 
