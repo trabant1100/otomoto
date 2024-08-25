@@ -33,7 +33,9 @@ html(lang="pl")
 					- var snapshots = auction.snapshots.toReversed()
 					a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
 					.header
-						.title= lastSnapshot.description
+						.title
+							span.year= auction.year
+							| #{lastSnapshot.description}
 						.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 							| #{priceChange}%
 					.locationVin
