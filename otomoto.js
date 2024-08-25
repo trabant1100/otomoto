@@ -9,7 +9,7 @@ const cheerio = require('cheerio');
 	const listingUrl = config.listing.url;
 	const today = format.asString('dd.MM.yyyy', new Date());
 	const auctionsDir = listingDir + '/' + today;
-	const imagesDir = auctionsDir + '/images';
+	const imagesDir = './images';
 
 	await fs.mkdir(auctionsDir, { recursive: true });
 	await fs.mkdir(imagesDir, { recursive: true });

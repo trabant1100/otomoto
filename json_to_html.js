@@ -7,7 +7,7 @@ const format = require('date-format');
 	const listingDir = config.listing.dir;
 	const today = format.asString('dd.MM.yyyy', new Date());
 	const auctionsDir = listingDir + '/' + today;
-	const imagesDir = 'images';
+	const imagesDir = '../../images';
 
 	for (const filename of await fs.readdir(auctionsDir)) {
 		const fullFilename = `${auctionsDir}/${filename}`;
