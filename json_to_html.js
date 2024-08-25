@@ -1,11 +1,10 @@
 const fs = require('node:fs/promises');
 const format = require('date-format');
-
+const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	const today = format.asString('dd.MM.yyyy', new Date());
 	const auctionsDir = listingDir + '/' + today;
 	const imagesDir = '../../images';
 
