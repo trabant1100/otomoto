@@ -254,8 +254,8 @@ details[open] + .snapshots {
 
 @media screen and (hover: hover) {
 	.auctions {
-		flex-direction: row;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
 	}
 
 	.auction {
