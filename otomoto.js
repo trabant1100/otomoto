@@ -19,7 +19,12 @@ const api_key = process.env.API_KEY;
 	for (const {url, year} of listingUrls) {
 		console.log(`Listing year ${year}`);
 		console.log('Getting list of auctions');
-		const { data } = await axios.get(getScrapeUrl(url));
+		let data = {};
+		try {
+			data = (await axios.get(getScrapeUrl(url))).data;
+		} catch(e) {
+			console.log(e.response.data);
+		}
 		const $ = cheerio.load(data);
 		const articles = $('article').toArray();
 		const auctions = [];
@@ -59,7 +64,12 @@ function getScrapeUrl(url) {
 }
 
 async function getAuctionDetails(url) {
-	const { data } = await axios.get(getScrapeUrl(url));
+	let data = {};
+	try {
+		data = (await axios.get(getScrapeUrl(url))).data;
+	} catch(e) {
+		console.log(e.response.data);
+	}
 	
 	return new Promise(resolve => {
 		const $ = cheerio.load(data);
