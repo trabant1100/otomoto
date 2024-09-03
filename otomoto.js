@@ -1,7 +1,9 @@
 const fs = require('node:fs/promises');
+const qs = require('querystring');
 const format = require('date-format');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const api_key = process.env.API_KEY;
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
@@ -17,7 +19,7 @@ const cheerio = require('cheerio');
 	for (const {url, year} of listingUrls) {
 		console.log(`Listing year ${year}`);
 		console.log('Getting list of auctions');
-		const { data } = await get(url);
+		const { data } = await axios.get(getScrapeUrl(url));
 		const $ = cheerio.load(data);
 		const articles = $('article').toArray();
 		const auctions = [];
@@ -50,16 +52,14 @@ const cheerio = require('cheerio');
 	}
 })();
 
-async function get(url) {
-	try {
-		return axios.get(url);
-	} catch(e) {
-		throw { code: e.code, statusText: e.response.statusText, data: e.response.data };
-	}
+function getScrapeUrl(url) {
+	const proxyParams = { api_key: api_key, url: url };
+	const proxyUrl = 'https://proxy.scrapeops.io/v1/?' + qs.stringify(proxyParams);
+	return proxyUrl;
 }
 
 async function getAuctionDetails(url) {
-	const { data } = await get(url);
+	const { data } = await axios.get(getScrapeUrl(url));
 	
 	return new Promise(resolve => {
 		const $ = cheerio.load(data);
@@ -104,7 +104,7 @@ function saveImagesFromAuction(dir, auction) {
 
 async function saveImage(url, filename) {
 	try {
-		const { data } = await get(url, { responseType: 'arraybuffer' });
+		const { data } = await axios.get(url, { responseType: 'arraybuffer' });
 		return fs.writeFile(filename, data);
 	} catch(e) {
 		console.error(e);
