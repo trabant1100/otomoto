@@ -55,7 +55,7 @@ const api_key = process.env.API_KEY;
 			await saveImagesFromAuction(imagesDir, auction);
 		}
 	}
-})();
+})().catch(e => console.error(e));
 
 function getScrapeUrl(url) {
 	const proxyParams = { api_key: api_key, url: url };
