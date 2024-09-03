@@ -17,7 +17,7 @@ const cheerio = require('cheerio');
 	for (const {url, year} of listingUrls) {
 		console.log(`Listing year ${year}`);
 		console.log('Getting list of auctions');
-		const { data } = await axios.get(url);
+		const { data } = await get(url);
 		const $ = cheerio.load(data);
 		const articles = $('article').toArray();
 		const auctions = [];
@@ -50,8 +50,16 @@ const cheerio = require('cheerio');
 	}
 })();
 
+async function get(url) {
+	try {
+		return axios.get(url);
+	} catch(e) {
+		throw { code: e.code, statusText: e.response.statusText, data: e.response.data };
+	}
+}
+
 async function getAuctionDetails(url) {
-	const { data } = await axios.get(url);
+	const { data } = await get(url);
 	
 	return new Promise(resolve => {
 		const $ = cheerio.load(data);
@@ -96,7 +104,7 @@ function saveImagesFromAuction(dir, auction) {
 
 async function saveImage(url, filename) {
 	try {
-		const { data } = await axios.get(url, { responseType: 'arraybuffer' });
+		const { data } = await get(url, { responseType: 'arraybuffer' });
 		return fs.writeFile(filename, data);
 	} catch(e) {
 		console.error(e);
