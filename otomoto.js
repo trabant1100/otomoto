@@ -23,7 +23,7 @@ const api_key = process.env.API_KEY;
 		try {
 			data = (await axios.get(getScrapeUrl(url))).data;
 		} catch(e) {
-			console.log(e.response.data);
+			throw e.response.data;
 		}
 		const $ = cheerio.load(data);
 		const articles = $('article').toArray();
@@ -68,7 +68,7 @@ async function getAuctionDetails(url) {
 	try {
 		data = (await axios.get(getScrapeUrl(url))).data;
 	} catch(e) {
-		console.log(e.response.data);
+		throw e.response.data;
 	}
 	
 	return new Promise(resolve => {
