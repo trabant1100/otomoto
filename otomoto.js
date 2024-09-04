@@ -54,12 +54,14 @@ const api_key = process.env.API_KEY;
 			console.log(`Saving images auction ${idx + 1}/${auctions.length}`);
 			await saveImagesFromAuction(imagesDir, auction);
 		}
+
 	}
 })().catch(e => console.error(e));
 
 function getScrapeUrl(url) {
 	const proxyParams = { api_key: api_key, url: url };
 	const proxyUrl = 'https://proxy.scrapeops.io/v1/?' + qs.stringify(proxyParams);
+
 	return proxyUrl;
 }
 
@@ -73,31 +75,16 @@ async function getAuctionDetails(url) {
 	
 	return new Promise(resolve => {
 		const $ = cheerio.load(data);
+		const advert = JSON.parse($('#__NEXT_DATA__').eq(0).text()).props.pageProps.advert;
 
-		const jqMainDiv = $('main > div');
-		const jqAside = jqMainDiv.children('aside').eq(0);
-		const jqAsideDiv = jqAside.children('div').children('div');
-
-		const title = jqAsideDiv.children('h1').text();
-		const description = jqAsideDiv.children('p').text();
-		const price = jqAsideDiv.find('div > div > h3').text();
-
-		const jqImgs = jqMainDiv.children('section').eq(1).find('img');
-		const srcImgRegex = /image;s=\d+x\d+$/;
-		const imgUrls = jqImgs.toArray()
-			.map(img => $(img).attr('src'))
-			.filter(url => srcImgRegex.test(url)) // image;s=148x110
-			.map(url => url.replace(srcImgRegex, 'image'));
-
-		const jqSectionDiv = jqMainDiv.children('section').eq(1).children('div').eq(0);
-		const date = jqSectionDiv.children('div').eq(0).children('p').text();
-		const id = jqSectionDiv.children('div').eq(1).children('p').text().replace(/^ID\s*:\s*/, '');
-
-		const fullDescription = jqMainDiv.children('section').eq(1).children('div[data-testid=content-description-section]')
-			.find('p')
-			.toArray()
-			.map(p => $(p).text())
-			.join('\n');
+		const title = advert.title;
+		const description = '';
+		const fullDescription = advert.description;
+		const price = advert.price.value;
+		const date = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'long', timeStyle: 'short' })
+			.format(new Date(advert.createdAt));
+		const id = advert.id;
+		const imgUrls = advert.images.photos.map(p => p.url);
 
 		resolve({ title, description, fullDescription, price, date, id, imgUrls });
 	});
