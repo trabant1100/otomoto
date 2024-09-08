@@ -11,47 +11,61 @@ html(lang="pl")
 		title= 'Report'
 		link(rel='stylesheet', type='text/css', href=`../report.css?${Math.random()}`)
 	body
-		input(type='checkbox', id='showEnded')
-		label(for='showEnded') Ended
-		input(type='checkbox', id='showBanned')
-		label(for='showBanned') Banned
-		input(type='checkbox', id='showCrashed')
-		label(for='showCrashed') Crashed
-		div(class='auctions')
-			each auction, auctionId in report
-				- var firstSnapshot = auction.snapshots[0]
-				- var lastSnapshot = auction.snapshots.at(-1)
-				- var priceChange = Math.round((lastSnapshot.price - firstSnapshot.price) / firstSnapshot.price * 100)
-				- var banned = bannedUrls.includes(lastSnapshot.url) ? 'banned' : ''
-				- var crashed = crashedUrls.includes(lastSnapshot.url) ? 'crashed' : ''
-				- var fav = favUrls.includes(lastSnapshot.url) ? 'fav' : ''
-				- var dead = deadUrls.includes(lastSnapshot.url) ? 'dead' : ''
-				- var ended = auction.ended ? 'ended' : ''
-				- var new_ = auction.new ? 'new' : '';
-				- var className = ['auction', banned, crashed, fav, dead, ended, new_].join(' ')
-				div(class=className)
-					- var snapshots = auction.snapshots.toReversed()
-					a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
-					.header
-						.title
-							span.year= auction.year
-							| #{lastSnapshot.description}
-						.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
-							| #{priceChange}%
-					.locationVin
-						.location= lastSnapshot.location
-						a.vin(href=`https://www.google.com/search?q=${auction.vin}`, target='_blank')
-							| #{(auction.vin || '').toUpperCase()}
-					.details
-						.mileage= lastSnapshot.mileage
-						.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'
-					.history(style=`--snapshots-count: ${snapshots.length-1};`)
-						details
-							summary.snapshot
-								+ snapshotDetail(snapshots[0])
-						.snapshots
-							each snapshot, index in snapshots.splice(1)
-								.snapshot
-									+ snapshotDetail(snapshot)
+		div#container
+			input(type='checkbox', data-kind='filter', id='showEnded')
+			label(for='showEnded', data-kind='filter') Ended
+			input(type='checkbox', data-kind='filter', id='showBanned')
+			label(for='showBanned', data-kind='filter') Banned
+			input(type='checkbox', data-kind='filter', id='showCrashed')
+			label(for='showCrashed', data-kind='filter') Crashed
+			
+			input(type='radio', data-kind='sort', name='sort', id='priceAsc', value='priceAsc')
+			label(for='priceAsc', data-kind='sort') Price ↑
+			input(type='radio', data-kind='sort', name='sort', id='priceDesc', value='priceDesc')
+			label(for='priceDesc', data-kind='sort') Price ↓
+			input(type='radio', data-kind='sort', name='sort', id='yearAsc', value='yearAsc', checked=true)
+			label(for='yearAsc', data-kind='sort') Year ↑
+			input(type='radio', data-kind='sort', name='sort', id='yearDesc', value='yearDesc')
+			label(for='yearDesc', data-kind='sort') Year ↓
+
+			div(class='auctions')
+				each auction, auctionId in report
+					- var firstSnapshot = auction.snapshots[0]
+					- var lastSnapshot = auction.snapshots.at(-1)
+					- var priceChange = Math.round((lastSnapshot.price - firstSnapshot.price) / firstSnapshot.price * 100)
+					- var banned = bannedUrls.includes(lastSnapshot.url) ? 'banned' : ''
+					- var crashed = crashedUrls.includes(lastSnapshot.url) ? 'crashed' : ''
+					- var fav = favUrls.includes(lastSnapshot.url) ? 'fav' : ''
+					- var dead = deadUrls.includes(lastSnapshot.url) ? 'dead' : ''
+					- var ended = auction.ended ? 'ended' : ''
+					- var new_ = auction.new ? 'new' : ''
+					- var className = ['auction', banned, crashed, fav, dead, ended, new_].join(' ')
+					- var year = `--year: ${auction.year}`
+					- var price = `--price: ${lastSnapshot.price}`
+					- var style = [year, price].join('; ')
+					div(class=className, style=style)
+						- var snapshots = auction.snapshots.toReversed()
+						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
+						.header
+							.title
+								span.year= auction.year
+								| #{lastSnapshot.description}
+							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
+								| #{priceChange}%
+						.locationVin
+							.location= lastSnapshot.location
+							a.vin(href=`https://www.google.com/search?q=${auction.vin}`, target='_blank')
+								| #{(auction.vin || '').toUpperCase()}
+						.details
+							.mileage= lastSnapshot.mileage
+							.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'
+						.history(style=`--snapshots-count: ${snapshots.length-1};`)
+							details
+								summary.snapshot
+									+ snapshotDetail(snapshots[0])
+							.snapshots
+								each snapshot, index in snapshots.splice(1)
+									.snapshot
+										+ snapshotDetail(snapshot)
 								
 
