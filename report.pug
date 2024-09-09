@@ -11,6 +11,7 @@ html(lang="pl")
 		title= 'Report'
 		link(rel='stylesheet', type='text/css', href=`../report.css?${Math.random()}`)
 	body
+		//- include car.svg
 		div#container
 			input(type='checkbox', data-kind='filter', id='showEnded')
 			label(for='showEnded', data-kind='filter') Ended
@@ -39,7 +40,8 @@ html(lang="pl")
 					- var dead = deadUrls.includes(lastSnapshot.url) ? 'dead' : ''
 					- var ended = auction.ended ? 'ended' : ''
 					- var new_ = auction.new ? 'new' : ''
-					- var className = ['auction', banned, crashed, fav, dead, ended, new_].join(' ')
+					- var country = auction.notes?.country;
+					- var className = ['auction', banned, crashed, fav, dead, ended, new_, country].join(' ')
 					- var year = `--year: ${auction.year}`
 					- var price = `--price: ${lastSnapshot.price}`
 					- var style = [year, price].join('; ')
@@ -48,8 +50,10 @@ html(lang="pl")
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
 						.header
 							.title
-								span.year= auction.year
-								| #{lastSnapshot.description}
+								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ')
+								div(class='car', style=damages)
+									include car.svg
+								div.year= auction.year
 							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 								| #{priceChange}%
 						.locationVin
@@ -59,6 +63,9 @@ html(lang="pl")
 						.details
 							.mileage= lastSnapshot.mileage
 							.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'
+						.notes
+							div
+
 						.history(style=`--snapshots-count: ${snapshots.length-1};`)
 							details
 								summary.snapshot

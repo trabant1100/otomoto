@@ -91,6 +91,71 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-performance-401km-sprzedaje-autoryzowany-dealer-forda-vat-23-ID6GlMU0.html": "1FM5K8GC3MGB42690",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-sprzedam-ford-explorer-benzyna-3-0-st-400km-z-kanady-ID6GuD0l.html": "1FM5K8GC7MGB19171",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-vi-suv-plug-in-hybrid-3-0-ecoboost-457km-ID6GHXRl.html": "WF02K8GY0LGA65746"
+        },
+        "notes":
+        {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html":
+            {
+                "country": "US",
+                "damage": [ "roof" ],
+                "price":
+                {
+                    "PLN": 189000,
+                    "USD": { "date": "21.04.2021", "value": 22800 }
+                }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html":
+            {
+                "country": "US",
+                "damage": [ "rear", "rear right wheel"],
+                "price":
+                {
+                    "USD": { "date": "09.11.2021" }
+                }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-czysta-benzyna-400hp-ID6GFzL5.html":
+            {
+                "country": "US",
+                "warnings": [ "invalid vin" ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-eksplorer-st-performance-benzyna-idealny-ID6GGU7B.html":
+            {
+                "country": "US",
+                "damage": [ "front", "front left wheel", "airbags" ],
+                "price":
+                {
+                    "USD": { "date": "21.11.2023" }
+                }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-vi-suv-plug-in-hybrid-3-0-ecoboost-457km-ID6GHXRl.html":
+            {
+                "country": "PL"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-praktycznie-nowy-st-performance-21-ID6FMc72.html":
+            {
+                "country": "US",
+                "damage": [ "rear left wheel", "airbags" ],
+                "price":
+                {
+                    "USD": { "value": 15650 }
+                }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-performance-401km-sprzedaje-autoryzowany-dealer-forda-vat-23-ID6GlMU0.html":
+            {
+                "country": "US",
+                "damage": [ "rear right wheel", "right", "airbags" ],
+                "price":
+                {
+                    "USD": { "date": "29.04.2022" }
+                },
+                "warnings": [ "ASO" ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-sprzedam-ford-explorer-benzyna-3-0-st-400km-z-kanady-ID6GuD0l.html":
+            {
+                "country": "CA",
+                "warnings": [ "no carfax" ],
+                "info": [ "private seller" ]
+            }
         }
     }
 }

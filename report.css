@@ -202,6 +202,29 @@ input[type=radio] {
 	filter: grayscale(1);
 }
 
+.auction.US > a.otomotoAuctionLink:any-link::before,
+.auction.CA > a.otomotoAuctionLink:any-link::before,
+.auction.PL > a.otomotoAuctionLink:any-link::before {
+	
+	float: right;
+	font-size: 200%;
+	margin-right: .1em;
+	margin-top: -.1em;
+	position: relative;
+}
+
+.auction.US > a.otomotoAuctionLink:any-link::before {
+	content: '🇺🇸';
+}
+
+.auction.CA > a.otomotoAuctionLink:any-link::before {
+	content: '🇨🇦';
+}
+
+.auction.PL > a.otomotoAuctionLink:any-link::before {
+	content: '🇵🇱';
+}
+
 .auction > div {
 	margin: 0 .3em;
 }
@@ -221,7 +244,47 @@ input[type=radio] {
 
 .title {
 	color: #777;
+	display: flex;
 	flex-grow: 1;
+	gap: .3em;
+}
+
+.car {
+	--damage: crimson;
+	margin-bottom: -.1em;
+	padding-top: .1em;
+}
+
+#svg-car {
+	height: 1em;
+}
+
+#car {
+	fill: #999;
+}
+
+#car #front-wheel {
+	fill: var(--front-left-wheel, var(--front-right-wheel));
+}
+
+#car #rear-wheel {
+	fill: var(--rear-left-wheel, var(--rear-right-wheel));
+}
+
+#car #rear {
+	fill: var(--rear);
+}
+
+#car #side {
+	fill: var(--left, var(--right));
+}
+
+#car #front {
+	fill: var(--front);
+}
+
+#car #top {
+	fill: var(--roof);
 }
 
 .title .year {
@@ -263,7 +326,8 @@ input[type=radio] {
 	text-decoration: none;
 }
 
-.details {
+.details,
+.notes {
 	color: #222;
 	display: flex;
 	flex-direction: row;

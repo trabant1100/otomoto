@@ -6,9 +6,9 @@ const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, vins } = config.report;
+	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, vins, notes } = config.report;
 
-	const report = await generateReport(today, vins, listingDir);
+	const report = await generateReport(today, vins, notes, listingDir);
 	console.log('Writing report json');
 	await fs.mkdir(reportDir, { recursive: true });
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
@@ -44,7 +44,7 @@ function normalizeReport(report) {
 	}, {});
 }
 
-async function generateReport(today, vins, rootDir) {
+async function generateReport(today, vins, notes, rootDir) {
 	const listingDirs = [];
 	for (const filename of await fs.readdir(rootDir)) {
 		const fullFilename = `${rootDir}/${filename}`;
@@ -93,6 +93,9 @@ async function generateReport(today, vins, rootDir) {
 			if (vins[url] !== undefined) {
 				auction.vin = vins[url];
 			}
+			if (notes[url] !== undefined) {
+				auction.notes = notes[url];
+			}
 		}
 	}
 
@@ -100,7 +103,7 @@ async function generateReport(today, vins, rootDir) {
 }
 
 async function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls }) {
-	const pugger = pug.compile(await fs.readFile('report.pug'));
+	const pugger = pug.compile(await fs.readFile('report.pug'), { filename: 'pug' });
 	const fn = {
 		parseDate(str) {
 			return format.parse('dd.MM.yyyy', str);
