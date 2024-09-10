@@ -50,8 +50,9 @@ html(lang="pl")
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
 						.header
 							.title
-								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ')
-								div(class='car', style=damages)
+								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ').replace('--airbags: var(--damage)', '--airbags: var(--airbags-damage); --airbags-opacity: 1')
+								- var damagesDesc = auction?.notes?.damage?.join(', ')
+								div(class='car', style=damages, title=damagesDesc)
 									include car.svg
 								div.year= auction.year
 							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)

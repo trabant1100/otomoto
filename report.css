@@ -251,6 +251,7 @@ input[type=radio] {
 
 .car {
 	--damage: crimson;
+	--airbags-damage: orange;
 	margin-bottom: -.1em;
 	padding-top: .1em;
 }
@@ -285,6 +286,11 @@ input[type=radio] {
 
 #car #top {
 	fill: var(--roof);
+}
+
+#airbags {
+	fill: var(--airbags-damage);
+	opacity: var(--airbags-opacity, 0) !important;
 }
 
 .title .year {
