@@ -119,7 +119,7 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-czysta-benzyna-400hp-ID6GFzL5.html":
             {
                 "country": "US",
-                "damage": "front, airbags",
+                "damage": ["front, airbags"],
                 "warnings": [ "invalid vin" ]
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-eksplorer-st-performance-benzyna-idealny-ID6GGU7B.html":
