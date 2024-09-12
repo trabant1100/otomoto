@@ -54,6 +54,8 @@ html(lang="pl")
 								- var damagesDesc = auction?.notes?.damage?.join(', ')
 								div(class='car', style=damages, title=damagesDesc)
 									include car.svg
+								- var warnings = auction?.notes?.warning?.join("\n")
+								div(class='warning', title=warnings): span='⚠️'
 								div.year= auction.year
 							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 								| #{priceChange}%

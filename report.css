@@ -204,8 +204,8 @@ input[type=radio] {
 
 .auction.US > a.otomotoAuctionLink:any-link::before,
 .auction.CA > a.otomotoAuctionLink:any-link::before,
-.auction.PL > a.otomotoAuctionLink:any-link::before {
-	
+.auction.PL > a.otomotoAuctionLink:any-link::before,
+.auction.DE > a.otomotoAuctionLink:any-link::before {
 	float: right;
 	font-size: 200%;
 	margin-right: .1em;
@@ -223,6 +223,10 @@ input[type=radio] {
 
 .auction.PL > a.otomotoAuctionLink:any-link::before {
 	content: '🇵🇱';
+}
+
+.auction.DE > a.otomotoAuctionLink:any-link::before {
+	content: '🇩🇪';
 }
 
 .auction > div {
@@ -291,6 +295,21 @@ input[type=radio] {
 #airbags {
 	fill: var(--airbags-damage);
 	opacity: var(--airbags-opacity, 0) !important;
+}
+
+.warning {
+	color: orange;
+	cursor: default;
+	display: none;
+	font-size: .9em;
+}
+
+.warning[title] {
+	display: flex;
+}
+
+.warning > span {
+	align-self: center;
 }
 
 .title .year {
