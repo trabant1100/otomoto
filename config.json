@@ -96,7 +96,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-sprzedam-ford-explorer-benzyna-3-0-st-400km-z-kanady-ID6GuD0l.html": "1FM5K8GC7MGB19171",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-vi-suv-plug-in-hybrid-3-0-ecoboost-457km-ID6GHXRl.html": "WF02K8GY0LGA65746",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html": "1FM5K8GC0LGB37929",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html": "WF02K8GY6LGB37100"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html": "WF02K8GY6LGB37100",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html": "1FM5K8GC4LGC28332"
         },
         "notes":
         {
@@ -176,6 +177,15 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html":
             {
                 "country": "DE"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html":
+            {
+                "country": "US",
+                "damage": [ "front", "airbags" ],
+                "price":
+                {
+                    "USD": { "date": "20.09.2023" }
+                }
             }
         }
     }
