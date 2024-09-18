@@ -8,7 +8,7 @@ const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
 	const listingDir = config.listing.dir;
 	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, vins, notes } = config.report;
 
-	const report = await generateReport(today, vins, notes, listingDir);
+	const report = await generateReport(today, vins, normalizeNotes(notes), listingDir);
 	console.log('Writing report json');
 	await fs.mkdir(reportDir, { recursive: true });
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
@@ -42,6 +42,26 @@ function normalizeReport(report) {
 			acc = { ...acc, ...group };
 			return acc;
 	}, {});
+}
+
+function normalizeNotes(notes) {
+	const normalized = JSON.parse(JSON.stringify(notes));
+
+	for (const [url, note] of Object.entries(normalized)) {
+		if (note.price) {
+			for (const [currency, price] of Object.entries(note.price)) {
+				let normalizedPrice = {};
+				if (typeof price == 'number') {
+					normalizedPrice = { date: undefined, value: price };
+				} else {
+					normalizedPrice = { date: price.date, value: price.value };
+				}
+				note.price[currency] = normalizedPrice;
+			}
+		}
+	}
+
+	return normalized;
 }
 
 async function generateReport(today, vins, notes, rootDir) {

@@ -52,11 +52,24 @@ html(lang="pl")
 							.title
 								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ').replace('--airbags: var(--damage)', '--airbags: var(--airbags-damage); --airbags-opacity: 1')
 								- var damagesDesc = auction?.notes?.damage?.join(', ')
-								div(class='car', style=damages, title=damagesDesc)
-									include car.svg
-								- var warnings = auction?.notes?.warning?.join("\n")
-								div(class='warning', title=warnings): span='⚠️'
-								div.year= auction.year
+								- var prices = auction?.notes?.price
+								details 
+									summary
+										div(class='car', style=damages, title=damagesDesc)
+											include car.svg
+										- var warnings = auction?.notes?.warning?.join("\n")
+										div(class='warning', title=warnings): span='⚠️'
+										div.year= auction.year
+								.notes
+									if damagesDesc
+										.damage= damagesDesc
+									if warnings
+										.warning= warnings
+									if prices
+										.prices
+											each price, currency in prices
+												- var priceValue = price.value ? new Intl.NumberFormat('pl-PL').format(price.value) : '?'
+												div= `${priceValue}${currency == 'USD' ? '$' : 'zł'} ${price.date || ''} `
 							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 								| #{priceChange}%
 						.locationVin
