@@ -6,9 +6,10 @@ const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, vins, notes } = config.report;
+	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, 
+		relisted_urls: relistedUrls, vins, notes } = config.report;
 
-	const report = await generateReport(today, vins, normalizeNotes(notes), listingDir);
+	const report = await generateReport(today, relistedUrls, vins, normalizeNotes(notes), listingDir);
 	console.log('Writing report json');
 	await fs.mkdir(reportDir, { recursive: true });
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
@@ -64,7 +65,7 @@ function normalizeNotes(notes) {
 	return normalized;
 }
 
-async function generateReport(today, vins, notes, rootDir) {
+async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 	const listingDirs = [];
 	for (const filename of await fs.readdir(rootDir)) {
 		const fullFilename = `${rootDir}/${filename}`;
@@ -117,6 +118,36 @@ async function generateReport(today, vins, notes, rootDir) {
 				auction.notes = notes[url];
 			}
 		}
+	}
+
+	const relistedAuctions = [];
+	for (const [auctionId, auction] of Object.entries(report)) {
+		const lastSnapshot = auction.snapshots.at(-1);
+		const url = lastSnapshot.url;
+		for (const [i, urls] of Object.entries(relistedUrls)) {
+			if (urls.includes(url)) {
+				const auction = getAuctionByUrl(url);
+				if (relistedAuctions[i] === undefined) {
+					relistedAuctions[i] = [];
+				}
+				relistedAuctions[i].push(auction);
+			}
+		}
+	}
+
+	for (const auctions of relistedAuctions) {
+		auctions.sort((auction1, auction2) => {
+			const date1 = format.parse('dd.MM.yyyy', auction1.snapshots.at(-1).snapshotDate);
+			const date2 = format.parse('dd.MM.yyyy', auction2.snapshots.at(-1).snapshotDate);
+			
+			return date1.getTime() - date2.getTime();
+		});
+		const lastAuction = auctions.at(-1);
+		report[lastAuction.snapshots.at(-1).id].snapshots = auctions.flatMap(auction => auction.snapshots);
+	}
+
+	function getAuctionByUrl(url) {
+		return Object.values(report).find(auction => auction.snapshots.at(-1).url == url);
 	}
 
 	return report;

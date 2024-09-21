@@ -83,6 +83,13 @@
         ],
         "dead_urls":
         [],
+        "relisted_urls":
+        [
+            [
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GKP5W.html"
+            ]    
+        ],
         "vins":
         {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": "1FM5K8GC5LGB17692",
