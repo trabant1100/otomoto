@@ -101,25 +101,6 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 		}
 	}
 
-	for (const auctionId in report) {
-		const auction = report[auctionId];
-		const snapshots = auction.snapshots;
-		if (snapshots.at(-1).snapshotDate != today) {
-			auction.ended = true;
-		}
-		if (snapshots.length == 1 && snapshots[0].snapshotDate == today) {
-			auction.new = true;
-		}
-		for (const url of snapshots.map(s => s.url)) {
-			if (vins[url] !== undefined) {
-				auction.vin = vins[url];
-			}
-			if (notes[url] !== undefined) {
-				auction.notes = notes[url];
-			}
-		}
-	}
-
 	const relistedAuctions = [];
 	for (const [auctionId, auction] of Object.entries(report)) {
 		const lastSnapshot = auction.snapshots.at(-1);
@@ -142,8 +123,36 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 			
 			return date1.getTime() - date2.getTime();
 		});
+		const allUrls = auctions.map(auction => auction.snapshots.at(-1).url);
+		for (const auction of auctions) {
+			for (const snapshot of auction.snapshots) {
+				snapshot.alternateUrls = allUrls;
+			}
+		}
 		const lastAuction = auctions.at(-1);
 		report[lastAuction.snapshots.at(-1).id].snapshots = auctions.flatMap(auction => auction.snapshots);
+	}
+
+	for (const auctionId in report) {
+		const auction = report[auctionId];
+		const snapshots = auction.snapshots;
+		const lastSnapshot = snapshots.at(-1);
+		if (lastSnapshot.snapshotDate != today) {
+			auction.ended = true;
+		}
+		if (snapshots.length == 1 && snapshots[0].snapshotDate == today) {
+			auction.new = true;
+		}
+
+		const urls = lastSnapshot.alternateUrls ?? [lastSnapshot.url];
+		for (const url of urls) {
+			if (vins[url] !== undefined) {
+				auction.vin = vins[url];
+			}
+			if (notes[url] !== undefined) {
+				auction.notes = notes[url];
+			}
+		}
 	}
 
 	function getAuctionByUrl(url) {
