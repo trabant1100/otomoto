@@ -365,16 +365,16 @@ input[type=radio] {
 	color: darkgreen;
 }
 
-.priceChange[data-price-drop] {
+.auction[data-price-drop] .priceChange {
 	color: crimson;
 }
 
-.priceChange[data-price-drop]::before {
+.auction[data-price-drop] .priceChange::before {
 	content: '⬇';
 	margin-right: .2em;
 }
 
-.priceChange[data-price-rise]::before {
+.auction[data-price-rise] .priceChange::before {
 	content: '⬆';
 	font-size: .9em;
 	margin-right: .2em;
@@ -485,4 +485,85 @@ summary.snapshot::-webkit-details-marker {
 		flex-grow: 1;
 		min-width: max(20%, 20em);
 	}
+}
+
+/* chart */
+svg.priceChart {
+	--font-scale: 2.5;
+}
+
+@media screen and (hover: hover) {
+	svg.priceChart {
+		--font-scale: 1;
+	}
+}
+
+.auction svg.priceChart {
+	--price-main-color: darkgreen;
+	--price-bg-color: darkseagreen;
+}
+
+.auction[data-price-drop] svg.priceChart {
+	--price-main-color: crimson;
+	--price-bg-color: lightcoral;
+}
+
+svg.priceChart g.background line.axisDate {
+	stroke: #222;
+	stroke-width: .5;
+}
+
+svg.priceChart g.price rect {
+	fill: var(--price-main-color);
+}
+
+svg.priceChart g.price text {
+	fill: linen;
+	font-size: calc(1em / var(--font-scale) * 0.5);
+}
+
+svg.priceChart g.price polygon {
+	fill: white;
+	opacity: 0;
+	transition: opacity 200ms ease-in;
+}
+
+svg.priceChart g.price polyline {
+	fill: none;
+	stroke: var(--price-main-color);
+	stroke-linecap: round;
+	stroke-width: 1;
+}
+
+svg.priceChart g.price g.priceInfo {
+	display: none;
+}
+
+@media (hover: hover) {
+	svg.priceChart g.price polygon:hover {
+		opacity: .5;
+	}
+
+	svg.priceChart g.price polygon:hover ~ g.priceInfo {
+		display: unset;
+	}
+}
+
+@media (pointer: coarse) {
+	svg.priceChart g.price polygon:focus {
+		opacity: .5;
+	}
+
+	svg.priceChart g.price polygon:focus ~ g.priceInfo {
+		display: unset;
+	}
+}
+
+svg.priceChart g.dateInfo line.date {
+	stroke: #222;
+	stroke-width: .5;
+}
+
+svg.priceChart g.dateInfo text.date {
+	font-size: calc(1em / var(--font-scale) * 0.3);
 }

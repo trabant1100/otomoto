@@ -1,6 +1,7 @@
 const fs = require('node:fs/promises');
-const format = require('date-format');
-const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
+const { DateTime } = require('luxon');
+const DATE_FORMAT = 'dd.MM.yyyy';
+const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));

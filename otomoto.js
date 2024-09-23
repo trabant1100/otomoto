@@ -1,6 +1,7 @@
 const fs = require('node:fs/promises');
 const qs = require('querystring');
-const format = require('date-format');
+const { DateTime } = require('luxon');
+const DATE_FORMAT = 'dd.MM.yyyy';
 const axios = require('axios');
 const cheerio = require('cheerio');
 const api_key = process.env.API_KEY;
@@ -9,7 +10,7 @@ const api_key = process.env.API_KEY;
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
 	const listingUrls = config.listing.urls;
-	const today = format.asString('dd.MM.yyyy', new Date());
+	const today = DateTime.now().toFormat(DATE_FORMAT);
 	const auctionsDir = listingDir + '/' + today;
 	const imagesDir = './images';
 

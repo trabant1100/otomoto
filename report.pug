@@ -11,7 +11,7 @@ html(lang="pl")
 		title= 'Report'
 		link(rel='stylesheet', type='text/css', href=`../report.css?${Math.random()}`)
 	body
-		//- include car.svg
+		include chart
 		div#container
 			input(type='checkbox', data-kind='filter', id='showEnded')
 			label(for='showEnded', data-kind='filter') Ended
@@ -45,7 +45,7 @@ html(lang="pl")
 					- var year = `--year: ${auction.year}`
 					- var price = `--price: ${lastSnapshot.price}`
 					- var style = [year, price].join('; ')
-					div(class=className, style=style)
+					div(class=className, style=style, data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 						- var snapshots = auction.snapshots.toReversed()
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
 						.header
@@ -70,7 +70,7 @@ html(lang="pl")
 											each price, currency in prices
 												- var priceValue = price.value ? new Intl.NumberFormat('pl-PL').format(price.value) : '?'
 												div= `${priceValue}${currency == 'USD' ? '$' : 'zł'} ${price.date || ''} `
-							.priceChange(data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
+							.priceChange
 								| #{priceChange}%
 						.locationVin
 							.location= lastSnapshot.location
@@ -83,12 +83,5 @@ html(lang="pl")
 							div
 
 						.history(style=`--snapshots-count: ${snapshots.length-1};`)
-							details
-								summary.snapshot
-									+ snapshotDetail(snapshots[0])
-							.snapshots
-								each snapshot, index in snapshots.splice(1)
-									.snapshot
-										+ snapshotDetail(snapshot)
-								
-
+							- var chronos = snapshots.toReversed().map(s => ({ date: s.snapshotDate, price: s.price }))
+							+chart(auctionId, scale, chronos, fn)

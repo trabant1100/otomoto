@@ -1,0 +1,15 @@
+doctype html
+html(lang="pl")
+	head
+		meta(charset='utf-8')
+		title= 'Chart'
+		link(rel='stylesheet', type='text/css', href=`../../report.css?${Math.random()}`)
+		style.
+			body {
+				--price-main-color: darkgreen;
+				--price-bg-color: darkseagreen;
+			}
+	body
+		include ../../chart
+		each chronos, id in chronosList
+			+chart(id, scale, chronos, fn)

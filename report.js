@@ -1,7 +1,9 @@
 const fs = require('node:fs/promises');
-const format = require('date-format');
+const fn = require('./chart.js');
+const { DateTime } = require('luxon');
+const DATE_FORMAT = 'dd.MM.yyyy';
 const pug = require('pug');
-const today = process.argv[2] ?? format.asString('dd.MM.yyyy', new Date());
+const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
@@ -76,10 +78,10 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 		}
 	}
 	listingDirs.sort((fname1, fname2) => {
-		const date1 = format.parse('dd.MM.yyyy', fname1);
-		const date2 = format.parse('dd.MM.yyyy', fname2);
+		const date1 = DateTime.fromFormat(fname1, DATE_FORMAT);
+		const date2 = DateTime.fromFormat(fname2, DATE_FORMAT);
 		
-		return date1.getTime() - date2.getTime();
+		return date1.toMillis() - date2.toMillis();
 	});
 
 	const report = {};
@@ -118,10 +120,10 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 
 	for (const auctions of relistedAuctions) {
 		auctions.sort((auction1, auction2) => {
-			const date1 = format.parse('dd.MM.yyyy', auction1.snapshots.at(-1).snapshotDate);
-			const date2 = format.parse('dd.MM.yyyy', auction2.snapshots.at(-1).snapshotDate);
+			const date1 = DateTime.fromFormat(auction1.snapshots.at(-1).snapshotDate, DATE_FORMAT);
+			const date2 = DateTime.fromFormat(auction2.snapshots.at(-1).snapshotDate, DATE_FORMAT);
 			
-			return date1.getTime() - date2.getTime();
+			return date1.toMillis() - date2.toMillis();
 		});
 		const allUrls = auctions.map(auction => auction.snapshots.at(-1).url);
 		for (const auction of auctions) {
@@ -164,13 +166,14 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 
 async function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls }) {
 	const pugger = pug.compile(await fs.readFile('report.pug'), { filename: 'pug' });
-	const fn = {
-		parseDate(str) {
-			return format.parse('dd.MM.yyyy', str);
-		}
+	const scale = {
+		xMargin: 2,
+		priceMargin: 8,
+		price: 40,
+		date: 150
 	};
 
-	return pugger( { report, bannedUrls, crashedUrls, favUrls, deadUrls, fn } );
+	return pugger( { report, bannedUrls, crashedUrls, favUrls, deadUrls, scale, fn } );
 }
 
 function createRedirectHtml(reportDir, today) {
