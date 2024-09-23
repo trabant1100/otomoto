@@ -85,3 +85,12 @@ html(lang="pl")
 						.history(style=`--snapshots-count: ${snapshots.length-1};`)
 							- var chronos = snapshots.toReversed().map(s => ({ date: s.snapshotDate, price: s.price }))
 							+chart(auctionId, scale, chronos, fn)
+							details
+								summary.snapshot
+									+ snapshotDetail(snapshots[0])
+							.snapshots
+								each snapshot, index in snapshots.splice(1)
+									.snapshot
+										+ snapshotDetail(snapshot)
+								
+
