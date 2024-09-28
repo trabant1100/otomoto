@@ -46,9 +46,7 @@ async function getAuctionUrl(listingDir, auctionId) {
 		try {
 			const fullFilename = `${listingDir}/${listing}/${auctionId}.json`;
 			await fs.access(fullFilename);
-			console.log(`Found ${fullFilename}`);
 			const { url } = JSON.parse(await fs.readFile(fullFilename));
-			console.log(url);
 			return url;
 		} catch(e) {
 
