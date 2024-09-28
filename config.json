@@ -1,24 +1,20 @@
 {
-    "listing":
-    {
+    "listing": {
         "dir": "listing",
-        "urls": 
-            [
-                {
-                    "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020&search%5Badvanced_search_expanded%5D=false",
-                    "year": 2020
-                },
-                {
-                    "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2021?search%5Bfilter_float_year%3Ato%5D=2021&search%5Badvanced_search_expanded%5D=false",
-                    "year": 2021
-                }
-            ]
+        "urls": [
+            {
+                "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020&search%5Badvanced_search_expanded%5D=false",
+                "year": 2020
+            },
+            {
+                "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2021?search%5Bfilter_float_year%3Ato%5D=2021&search%5Badvanced_search_expanded%5D=false",
+                "year": 2021
+            }
+        ]
     },
-    "report":
-    {
+    "report": {
         "dir": "report",
-        "banned_urls":
-        [
+        "banned_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-2-3-ecoboost-303km-2020-ID6GsaaA.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-7-miejsc-suv-w-doskonalym-stanie-ID6Gnm35.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-maly-przebieg-jak-nowy-piekne-duze-auto-7-osob-ID6GwFMg.html",
@@ -45,8 +41,7 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-platinium-3-0-gtdi-tc-v6-400km-pelen-komfort-ID6GKKDW.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ID6GLGXI.html"
         ],
-        "crashed_urls":
-        [
+        "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-4x4-400hp-ID6GvgM5.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-fv23-leasing-ID6GzGhZ.html",
@@ -73,8 +68,7 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-4x4-automat-benzyna-panorama-ID6GJXj3.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-awd-v6-400ps-import-kanada-niebawem-w-pl-ID6GKpV0.html"
         ],
-        "fav_urls":
-        [
+        "fav_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-400km-ID6GqSpp.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400km-super-stan-biala-masaze-navi-4x4-ID6GvrtU.html",
@@ -84,17 +78,26 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-performance-jak-nowy-ID6GD6F3.html"
         ],
-        "dead_urls":
-        [],
-        "relisted_urls":
-        [
+        "dead_urls": [],
+        "relisted_urls": [
             [
                 "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html",
                 "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GKP5W.html"
-            ]    
+            ],
+            [
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ID6GwbEg.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ID6GKP5y.html"
+            ],
+            [
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400-km-4x4-wersja-st-male-uszkodzenia-piekny-kolor-ID6GEVdJ.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-benzyna-400-km-naped-awd-6-osobowy-ID6GIDJs.html"
+            ],
+            [
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-wersja-st-400km-male-uszkodzenia-ID6GIsoi.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400-km-4x4-wersja-st-male-uszkodzenia-sprawdzony-importer-ID6GJuDI.html"
+            ]
         ],
-        "vins":
-        {
+        "vins": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": "1FM5K8GC5LGB17692",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html": "1fm5k8gc7lga40422",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-400km-super-stan-biala-masaze-navi-4x4-ID6GvrtU.html": "1FM5K8GC7LGB87274",
@@ -111,93 +114,130 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html": "WF02K8GY6LGB37100",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html": "1FM5K8GC4LGC28332"
         },
-        "notes":
-        {
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html":
-            {
+        "notes": {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
                 "country": "US",
-                "damage": [ "roof" ],
-                "price":
-                {
+                "damage": [
+                    "roof"
+                ],
+                "price": {
                     "PLN": 189000,
-                    "USD": { "date": "21.04.2021", "value": 22800 }
+                    "USD": {
+                        "date": "21.04.2021",
+                        "value": 22800
+                    }
                 }
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ID6GwcNq.html": {
                 "country": "US",
-                "damage": [ "rear", "rear right wheel"],
-                "price":
-                {
-                    "USD": { "date": "09.11.2021" }
+                "damage": [
+                    "rear",
+                    "rear right wheel"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "09.11.2021"
+                    }
                 }
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-czysta-benzyna-400hp-ID6GFzL5.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-czysta-benzyna-400hp-ID6GFzL5.html": {
                 "country": "US",
-                "damage": ["front", "airbags"],
-                "warning": [ "invalid vin" ]
+                "damage": [
+                    "front",
+                    "airbags"
+                ],
+                "warning": [
+                    "invalid vin"
+                ]
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-eksplorer-st-performance-benzyna-idealny-ID6GGU7B.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-eksplorer-st-performance-benzyna-idealny-ID6GGU7B.html": {
                 "country": "US",
-                "damage": [ "front", "front left wheel", "airbags" ],
-                "price":
-                {
-                    "USD": { "date": "21.11.2023" }
+                "damage": [
+                    "front",
+                    "front left wheel",
+                    "airbags"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "21.11.2023"
+                    }
                 }
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-vi-suv-plug-in-hybrid-3-0-ecoboost-457km-ID6GHXRl.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-vi-suv-plug-in-hybrid-3-0-ecoboost-457km-ID6GHXRl.html": {
                 "country": "DE"
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-praktycznie-nowy-st-performance-21-ID6FMc72.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-praktycznie-nowy-st-performance-21-ID6FMc72.html": {
                 "country": "US",
-                "damage": [ "rear left wheel", "airbags" ],
-                "price":
-                {
-                    "USD": { "value": 15650 }
+                "damage": [
+                    "rear left wheel",
+                    "airbags"
+                ],
+                "price": {
+                    "USD": {
+                        "value": 15650
+                    }
                 }
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-performance-401km-sprzedaje-autoryzowany-dealer-forda-vat-23-ID6GlMU0.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-performance-401km-sprzedaje-autoryzowany-dealer-forda-vat-23-ID6GlMU0.html": {
                 "country": "US",
-                "damage": [ "rear right wheel", "right", "airbags" ],
-                "price":
-                {
-                    "USD": { "date": "29.04.2022" }
+                "damage": [
+                    "rear right wheel",
+                    "right",
+                    "airbags"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "29.04.2022"
+                    }
                 },
-                "warning": [ "ASO seller" ]
+                "warning": [
+                    "ASO seller"
+                ]
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-sprzedam-ford-explorer-benzyna-3-0-st-400km-z-kanady-ID6GuD0l.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-sprzedam-ford-explorer-benzyna-3-0-st-400km-z-kanady-ID6GuD0l.html": {
                 "country": "CA",
-                "warning": [ "no carfax" ],
-                "info": [ "private seller" ]
+                "warning": [
+                    "no carfax"
+                ],
+                "info": [
+                    "private seller"
+                ]
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-7-miejsc-ID6FPIy8.html": {
                 "country": "US",
-                "damage": [ "front", "front right wheel", "airbags" ],
-                "price":
-                {
-                    "USD": { "value": 25475, "date": "27.01.2022" }
+                "damage": [
+                    "front",
+                    "front right wheel",
+                    "airbags"
+                ],
+                "price": {
+                    "USD": {
+                        "value": 25475,
+                        "date": "27.01.2022"
+                    }
                 },
-                "warning": [ "vin from auction 1FM5K8GC0LGB37829", "production year 2019" ]
+                "warning": [
+                    "vin from auction 1FM5K8GC0LGB37829",
+                    "production year 2019"
+                ]
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html": {
                 "country": "DE"
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html":
-            {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html": {
                 "country": "US",
-                "damage": [ "front", "airbags" ],
-                "price":
-                {
-                    "USD": { "date": "20.09.2023" }
+                "damage": [
+                    "front",
+                    "airbags"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "20.09.2023"
+                    }
                 }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-fv-vat-23-ID6GJOGh.html": {
+                "country": "DE"
             }
         }
     }

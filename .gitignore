@@ -6,3 +6,6 @@
 otomoto.sublime-project
 otomoto.sublime-workspace
 test/price-chart/index.html
+.vscode/launch.json
+.DS_Store
+.vscode/launch.json
