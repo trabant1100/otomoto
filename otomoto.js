@@ -42,9 +42,13 @@ const api_key = process.env.API_KEY;
 
 			if (thumbnailUrl && url) {
 				console.log(`Getting details of auction #${auctionIdx + 1}`);
-				const details = await getAuctionDetails(url);
-				const auction = { thumbnailUrl, url, mileage, location, year, ...details };
-				auctions.push(auction);
+				try {
+				  const details = await getAuctionDetails(url);
+				  const auction = { thumbnailUrl, url, mileage, location, year, ...details };
+				  auctions.push(auction);
+				} catch (e) {
+				  console.error(`Error auction #${auctionIdx + 1}: ${e}`);
+				}
 				auctionIdx++;
 			}
 		}
