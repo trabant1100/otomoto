@@ -259,9 +259,12 @@
                     "airbags",
                     "front",
                     "front left wheel",
-                    "roof"],
+                    "roof"
+                ],
                 "price": {
-                    "USD": {"date": "11.01.2023"}
+                    "USD": {
+                        "date": "11.01.2023"
+                    }
                 }
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-okazyjnie-ford-explorer-i-wlasciciel-salon-polska-ID6GNcGc.html": {
