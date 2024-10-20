@@ -1,6 +1,6 @@
 const fs = require('node:fs/promises');
 const fn = require('./chart.js');
-const { DateTime } = require('luxon');
+const { DateTime, Interval } = require('luxon');
 const DATE_FORMAT = 'dd.MM.yyyy';
 const pug = require('pug');
 const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
@@ -171,6 +171,10 @@ async function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls
 		priceMargin: 8,
 		price: 40,
 		date: 150
+	};
+
+	fn.age = function(date) {
+		return Math.floor(Interval.fromDateTimes(date, DateTime.now()).toDuration('days').days);
 	};
 
 	return pugger( { report, bannedUrls, crashedUrls, favUrls, deadUrls, scale, fn } );

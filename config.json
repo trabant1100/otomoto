@@ -140,7 +140,9 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-wersja-europejska-bezwypadkowy-457-km-ID6GJOGh.html": "WF02K8GY6LGB37100",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-kamery-360-ford-performance-st-404km-masaze-6-osobowy-ID6GK5pG.html": "1FM5K8GC4LGC28332",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ecoboost-3-0-biturbo-ID6GMsOt.html": "1FM5K8GC7MGB50081",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-plugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-plugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-400km-czysta-benzyna-mozliwa-zamiana-bez-wkladu-ID6GPpMm.html": "1FM5K8GC3LGA01052",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936"
         },
         "notes": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
@@ -285,6 +287,26 @@
                 "country": "PL"
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-plugin-457km-3-0biturbo-st-line-ID6GOleB.html": {
+                "country": "DE"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-400km-czysta-benzyna-mozliwa-zamiana-bez-wkladu-ID6GPpMm.html": {
+                "country": "US",
+                "damage": [
+                    "airbags",
+                    "front",
+                    "front right wheel"
+                ],
+                "price": {
+                    "USD" : {
+                        "date": "11.02.2021",
+                        "value": 25000
+                    }
+                },
+                "warning": [
+                    "7 seats in registration certificate"
+                ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": {
                 "country": "DE"
             }
         }

@@ -45,10 +45,12 @@ html(lang="pl")
 					- var year = `--year: ${auction.year}`
 					- var price = `--price: ${lastSnapshot.price}`
 					- var style = [year, price].join('; ')
+					- var age = Math.floor(fn.age(fn.parseDate(firstSnapshot.snapshotDate)) / (356/2) * 100);
+					- var firstAuction = fn.parseDate(firstSnapshot.snapshotDate).toRelative({ locale: 'pl-PL'})
 					div(class=className, style=style, data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 						- var snapshots = auction.snapshots.toReversed()
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
-						.header
+						.header(style=`--first-auction: '${firstAuction}'; --age: ${age}%`)
 							.title
 								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ').replace('--airbags: var(--damage)', '--airbags: var(--airbags-damage); --airbags-opacity: 1')
 								- var damagesDesc = auction?.notes?.damage?.join(', ')
