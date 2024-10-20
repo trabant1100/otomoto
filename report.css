@@ -255,9 +255,8 @@ input[type=radio] {
 	left: -.3em;
 	padding: .1em .3em;
 	position: relative;
-	top: -1.6em;
+	top: -1.65em;
 	width: 100%;
-/*	opacity: .5;*/
 }
 
 .title {
