@@ -29,10 +29,11 @@ mixin chart(id, scale, chronos, fn)
 			line(x1=0, y1=scale.price, x2=scale.date, y2=scale.price, class='axisDate')
 			polygon(points=fillPoints.join(' '), fill=`url(#fillGradient${id})`)
 		- var priceInfos = fn.calculatePriceInfos(chronosPoints, chronos, scale)
-		each priceInfo in priceInfos
+		each priceInfo, priceInfoIndex in priceInfos
 			- var index = priceInfo.index
 			- var priceChangeIndex = priceInfo.priceChangeIndex
 			- var point = priceInfo.point
+			- var nextPoint = priceInfos[priceInfoIndex + 1]?.point ?? { x: Number.MAX_VALUE, y: point.y }
 			- var points = priceInfo.points
 			- var trans = priceInfo.trans
 			- var priceWidth = priceInfo.priceWidth
@@ -47,7 +48,9 @@ mixin chart(id, scale, chronos, fn)
 			g.dateInfo
 				- var date = fn.parseDate(chronos[index ? index - 1 : 0].date)
 				- var textAnchor = index ? 'middle' : 'start'
+				- var dist = nextPoint.x - point.x
 				line.date(x1=point.x, y1=scale.price, x2=point.x, y2=scale.price + 3)
-				text(x=point.x, y=scale.price + 4, text-anchor=textAnchor, dominant-baseline='hanging', class='date')
-					| #{new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short' }).format(date)}
+				if dist >= 10
+					text(x=point.x, y=scale.price + 4, text-anchor=textAnchor, dominant-baseline='hanging', class='date')
+						| #{new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short' }).format(date)}
 		
