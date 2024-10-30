@@ -11,7 +11,7 @@ const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
 	const { dir: reportDir, banned_urls: bannedUrls, crashed_urls: crashedUrls, fav_urls: favUrls, dead_urls: deadUrls, 
 		relisted_urls: relistedUrls, vins, notes } = config.report;
 
-	const report = await generateReport(today, relistedUrls, vins, normalizeNotes(notes), listingDir);
+	const report = await generateReport(today, relistedUrls, vins, normalizeNotes(notes), listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls });
 	console.log('Writing report json');
 	await fs.mkdir(reportDir, { recursive: true });
 	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
@@ -67,13 +67,13 @@ function normalizeNotes(notes) {
 	return normalized;
 }
 
-async function generateReport(today, relistedUrls, vins, notes, rootDir) {
+async function generateReport(today, relistedUrls, vins, notes, rootDir, { bannedUrls, crashedUrls, favUrls, deadUrls }) {
 	const listingDirs = [];
+	console.log('Processing listings');
 	for (const filename of await fs.readdir(rootDir)) {
 		const fullFilename = `${rootDir}/${filename}`;
 		const stat = await fs.stat(fullFilename);
 		if (stat.isDirectory() && /\d\d.\d\d.\d{4}/.test(filename)) {
-			console.log(`Found listing ${filename}`);
 			listingDirs.push(filename);
 		}
 	}
@@ -86,13 +86,13 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 
 	const report = {};
 
+	console.log('Processing auction files');
 	for (const listingDir of listingDirs) {
 		const fullListingDir = `${rootDir}/${listingDir}`;
 		for (const filename of await fs.readdir(fullListingDir)) {
 			const fullFilename = `${rootDir}/${listingDir}/${filename}`;
 			const stat = await fs.stat(fullFilename);
 			if (stat.isFile() && filename.endsWith('.json')) {
-				console.log(`Found auction file ${fullFilename}`);
 				const auction = JSON.parse(await fs.readFile(fullFilename));
 				auction.snapshotDate = listingDir;
 				if (report[auction.id] === undefined) {
@@ -154,6 +154,10 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir) {
 			if (notes[url] !== undefined) {
 				auction.notes = notes[url];
 			}
+			auction.banned ||= bannedUrls.includes(url);
+			auction.crashed ||= crashedUrls.includes(url);
+			auction.fav ||= favUrls.includes(url);
+			auction.dead ||= deadUrls.includes(url);
 		}
 	}
 
