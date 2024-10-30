@@ -153,7 +153,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-ecoboost-3-0-biturbo-ID6GMsOt.html": "1FM5K8GC7MGB50081",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-plugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-400km-czysta-benzyna-mozliwa-zamiana-bez-wkladu-ID6GPpMm.html": "1FM5K8GC3LGA01052",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-f-vat-23-3-0-hybryda-plug-in-457-km-4x4-1wlas-totalny-full-europa-ID6GRe2l.html": "WF02K8GY8MNA04089"
         },
         "notes": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
@@ -319,6 +320,12 @@
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": {
                 "country": "DE"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-f-vat-23-3-0-hybryda-plug-in-457-km-4x4-1wlas-totalny-full-europa-ID6GRe2l.html": {
+                "country": "IT",
+                "warning": [
+                    "No registration number"
+                ]
             }
         }
     }
