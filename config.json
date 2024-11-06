@@ -53,7 +53,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-xlt-4x4-2020r-okazja-2-3-benzyna-ecoboost-ID6GQJLd.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-rodzinny-duzy-suv-ID6GQKnA.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-2020r-4x4-3-0l-ID6GQUiL.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-ID6GRAvz.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-ID6GRAvz.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-ID6GSrTc.html"
         ],
         "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
@@ -156,7 +157,9 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-plugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-400km-czysta-benzyna-mozliwa-zamiana-bez-wkladu-ID6GPpMm.html": "1FM5K8GC3LGA01052",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-f-vat-23-3-0-hybryda-plug-in-457-km-4x4-1wlas-totalny-full-europa-ID6GRe2l.html": "WF02K8GY8MNA04089"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-f-vat-23-3-0-hybryda-plug-in-457-km-4x4-1wlas-totalny-full-europa-ID6GRe2l.html": "WF02K8GY8MNA04089",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-2020-benzyna-400km-ID6GRSEA.html": "1FM5K8GC5LGA47501",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-6-osobowy-ID6GSek3.html": "1FM5K8GCXLGA04899"
         },
         "notes": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
@@ -327,6 +330,35 @@
                 "country": "IT",
                 "warning": [
                     "No registration number"
+                ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-2020-benzyna-400km-ID6GRSEA.html": {
+                "country": "US",
+                "damage": [
+                    "rear"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "29.03.2024",
+                        "value": 17075
+                    }
+                }
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-6-osobowy-ID6GSek3.html": {
+                "country": "US",
+                "damage": [
+                    "airbags",
+                    "front",
+                    "front left wheel"
+                ],
+                "price": {
+                    "USD": {
+                        "date": "24.02.2024",
+                        "value": 9375
+                    }
+                },
+                "warning": [
+                    "Unknown seller in US"
                 ]
             }
         }
