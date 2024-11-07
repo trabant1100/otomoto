@@ -1,17 +1,7 @@
 mixin chart(id, scale, chronos, fn)
 	svg(class='priceChart', viewBox=`-${scale.xMargin} 0 ${scale.date + scale.xMargin * 2} ${scale.price + 10}`)
 		-
-			var chronos = fn.normalizeChronos(scale, chronos)
-			var chronosPoints = [{ x: 0, y: scale.price - chronos[0].chartPrice }]
-				.concat(
-					Array.from(chronos.entries())
-						.map(([i, s]) => {
-							const next = chronos[i+1];
-							const offset = next && s.chartPrice != next?.chartPrice 
-								? (next?.chartDate - s.chartDate - 2) 
-								: 0;
-							return { x: s.chartDate + offset, y: scale.price - s.chartPrice };
-						}))
+			var chronosPoints = fn.calcChronosPoints(scale, fn.normalizeChronos(scale, chronos))
 			var svgPoints = chronosPoints
 				.map(p => `${p.x},${p.y}`)
 			var fillPoints = chronosPoints

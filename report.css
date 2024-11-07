@@ -555,6 +555,7 @@ svg.priceChart g.price polyline {
 
 svg.priceChart g.price g.priceInfo {
 	display: none;
+	pointer-events: none;
 }
 
 @media (hover: hover) {
