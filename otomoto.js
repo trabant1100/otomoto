@@ -5,6 +5,7 @@ const DATE_FORMAT = 'dd.MM.yyyy';
 const axios = require('axios');
 const cheerio = require('cheerio');
 const api_key = process.env.API_KEY;
+const DEBUG = process.env.DEBUG;
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));
@@ -17,14 +18,41 @@ const api_key = process.env.API_KEY;
 	await fs.mkdir(auctionsDir, { recursive: true });
 	await fs.mkdir(imagesDir, { recursive: true });
 
+	if (DEBUG) {
+		await fs.mkdir('./DEBUG', { recursive: true });
+	}
+
 	for (const {url, year} of listingUrls) {
 		console.log(`Listing year ${year}`);
 		console.log('Getting list of auctions');
+		const debugFilename = `./DEBUG/${year}.html`;
 		let data = {};
 		try {
-			data = (await axios.get(getScrapeUrl(url))).data;
+			let download = true;
+			if (DEBUG) {
+				try {
+					await fs.access(debugFilename);
+					download = false;
+				} catch {
+					download = true;
+				}
+			}
+			if (download) {
+				data = (await axios.get(getScrapeUrl(url))).data;
+				if (DEBUG) {
+					console.debug(`Writing ${debugFilename}`);
+					await fs.writeFile(debugFilename, data);
+				}
+			} else {
+				console.debug(`Reading ${debugFilename}`);
+				data = await fs.readFile(debugFilename)
+			}
 		} catch(e) {
-			throw e.response.data;
+			if (DEBUG) {
+				throw e;
+			} else {
+				throw e.response.data;
+			}
 		}
 		const $ = cheerio.load(data);
 		const articles = $('article').toArray();
@@ -36,7 +64,7 @@ const api_key = process.env.API_KEY;
 			const jqDivs = jqSection.children('div');
 
 			const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
-			const url = jqDivs.eq(1).find('h1 a').attr('href');
+			const url = jqDivs.eq(1).find('p a').attr('href');
 			const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
 			const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
 
@@ -71,9 +99,28 @@ function getScrapeUrl(url) {
 }
 
 async function getAuctionDetails(url) {
+	const debugFilename = './DEBUG/' + url.replaceAll(/[/:]/g, '_');
 	let data = {};
 	try {
-		data = (await axios.get(getScrapeUrl(url))).data;
+		let download = true;
+		if (DEBUG) {
+			try {
+				await fs.access(debugFilename);
+				download = false;
+			} catch {
+				download = true;
+			}
+		}
+		if (download) {
+			data = (await axios.get(getScrapeUrl(url))).data;
+			if (DEBUG) {
+				console.debug(`Writing ${debugFilename}`);
+				await fs.writeFile(debugFilename, data);
+			}
+		} else {
+			console.debug(`Reading ${debugFilename}`);
+			data = await fs.readFile(debugFilename)
+		}
 	} catch(e) {
 		throw e.response.data;
 	}
