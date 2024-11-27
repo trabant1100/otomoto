@@ -208,7 +208,8 @@ input[type=radio] {
 .auction.PL > a.otomotoAuctionLink:any-link::before,
 .auction.DE > a.otomotoAuctionLink:any-link::before,
 .auction.IT > a.otomotoAuctionLink:any-link::before,
-.auction.FR > a.otomotoAuctionLink:any-link::before {
+.auction.FR > a.otomotoAuctionLink:any-link::before,
+.auction.SE > a.otomotoAuctionLink:any-link::before {
 	float: right;
 	font-size: 200%;
 	margin-right: .1em;
@@ -238,6 +239,10 @@ input[type=radio] {
 
 .auction.FR > a.otomotoAuctionLink:any-link::before {
 	content: '🇫🇷';
+}
+
+.auction.SE > a.otomotoAuctionLink:any-link::before {
+	content: '🇸🇪';
 }
 
 .auction > div {
