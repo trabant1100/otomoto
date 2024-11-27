@@ -166,7 +166,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-zarejestriwany-pl-z-gwarancjaplugin-457km-3-0biturbo-st-line-ID6GOleB.html": "WF02K8GY0MNA17936",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-f-vat-23-3-0-hybryda-plug-in-457-km-4x4-1wlas-totalny-full-europa-ID6GRe2l.html": "WF02K8GY8MNA04089",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-2020-benzyna-400km-ID6GRSEA.html": "1FM5K8GC5LGA47501",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-6-osobowy-ID6GSek3.html": "1FM5K8GCXLGA04899"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-3-0-v6-400km-6-osobowy-ID6GSek3.html": "1FM5K8GCXLGA04899",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-awd-plugin-st-line-7os-led-pano-kam360-asystenci-wentyl-gwarancja-fv23-ID6GUYMO.html": "WF02K8GY8MNA09G77"
         },
         "notes": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
@@ -366,6 +367,19 @@
                 },
                 "warning": [
                     "Unknown seller in US"
+                ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-europa-457-km-4x4-7-osob-tuning-oryginal-lakier-skora-panorama-full-ID6GUZoR.html": {
+                "country": "FR",
+                "warning": [
+                    "Incomplete VIN",
+                    "December 2021"
+                ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-awd-plugin-st-line-7os-led-pano-kam360-asystenci-wentyl-gwarancja-fv23-ID6GUYMO.html": {
+                "country": "FR",
+                "warning": [
+                    "No registration number"
                 ]
             }
         }
