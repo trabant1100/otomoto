@@ -108,17 +108,20 @@ async function generateReport(today, relistedUrls, vins, notes, rootDir, { banne
 		const lastSnapshot = auction.snapshots.at(-1);
 		const url = lastSnapshot.url;
 		for (const [i, urls] of Object.entries(relistedUrls)) {
+			if (relistedAuctions[i] === undefined) {
+				relistedAuctions[i] = [];
+			}
 			if (urls.includes(url)) {
 				const auction = getAuctionByUrl(url);
-				if (relistedAuctions[i] === undefined) {
-					relistedAuctions[i] = [];
-				}
 				relistedAuctions[i].push(auction);
 			}
 		}
 	}
 
 	for (const auctions of relistedAuctions) {
+		if (auctions.length == 0) {
+			continue;
+		}
 		auctions.sort((auction1, auction2) => {
 			const date1 = DateTime.fromFormat(auction1.snapshots.at(-1).snapshotDate, DATE_FORMAT);
 			const date2 = DateTime.fromFormat(auction2.snapshots.at(-1).snapshotDate, DATE_FORMAT);
