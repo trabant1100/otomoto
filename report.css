@@ -100,6 +100,10 @@ input[type=radio] {
 	--display-banned: flex;
 }
 
+#showEnded:checked ~ #showBanned:checked ~ .auctions {
+	--display-banned-ended: flex;
+}
+
 #showCrashed:checked ~ .auctions {
 	--display-crashed: flex;
 }
@@ -124,6 +128,7 @@ input[type=radio] {
 	--display-ended: none;
 	--display-banned: none;
 	--display-crashed: none;
+	--display-banned-ended: none;
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
@@ -150,6 +155,10 @@ input[type=radio] {
 
 .auction.crashed {
 	display: var(--display-crashed);
+}
+
+.auction.banned.ended {
+	display: var(--display-banned-ended);
 }
 
 .auction.fav > a.otomotoAuctionLink:any-link,
