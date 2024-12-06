@@ -23,7 +23,7 @@ mixin chart(id, scale, chronos, fn)
 			- var index = priceInfo.index
 			- var priceChangeIndex = priceInfo.priceChangeIndex
 			- var point = priceInfo.point
-			- var nextPoint = priceInfos[priceInfoIndex + 1]?.point ?? { x: Number.MAX_VALUE, y: point.y }
+			- var prevPoint = priceInfos[priceInfoIndex - 1]?.point ?? { x: Number.MIN_SAFE_INTEGER, y: point.y }
 			- var points = priceInfo.points
 			- var trans = priceInfo.trans
 			- var priceWidth = priceInfo.priceWidth
@@ -38,7 +38,7 @@ mixin chart(id, scale, chronos, fn)
 			g.dateInfo
 				- var date = fn.parseDate(chronos[index ? index - 1 : 0].date)
 				- var textAnchor = index ? 'middle' : 'start'
-				- var dist = nextPoint.x - point.x
+				- var dist = point.x - prevPoint.x - (index ? 5 : 0)
 				line.date(x1=point.x, y1=scale.price, x2=point.x, y2=scale.price + 3)
 				if dist >= 10
 					text(x=point.x, y=scale.price + 4, text-anchor=textAnchor, dominant-baseline='hanging', class='date')
