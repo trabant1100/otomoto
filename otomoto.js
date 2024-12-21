@@ -64,7 +64,7 @@ const DEBUG = process.env.DEBUG;
 			const jqDivs = jqSection.children('div');
 
 			const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
-			const url = jqDivs.eq(1).find('p a').attr('href');
+			const url = jqDivs.find('a').eq(0).attr('href');
 			const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
 			const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
 
