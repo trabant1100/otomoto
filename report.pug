@@ -50,7 +50,9 @@ html(lang="pl")
 					div(class=className, style=style, data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 						- var snapshots = auction.snapshots.toReversed()
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
-						.header(style=`--first-auction: '${firstAuction}'; --age: ${age}%`)
+						.age(style=`--first-auction: '${firstAuction}'; --age: ${age}%`)
+							| #{firstAuction}
+						.header
 							.title
 								- var damages = auction?.notes?.damage?.map(d => `--${d.replaceAll(' ', '-')}: var(--damage)`).join('; ').replace('--airbags: var(--damage)', '--airbags: var(--airbags-damage); --airbags-opacity: 1')
 								- var damagesDesc = auction?.notes?.damage?.join(', ')

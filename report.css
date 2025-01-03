@@ -272,15 +272,14 @@ input[type=radio] {
 	gap: 0 1em;
 }
 
-.header::before {
+.auction > .age {
 	background: linear-gradient(90deg, darkseagreen 0, darkseagreen var(--age), #FFF8 var(--age), #FFF8 100%);
 	content: var(--first-auction);
 	flex-shrink: 0;
-	margin-bottom: -1em;
-	left: -.3em;
-	padding: .1em .3em;
-	position: relative;
-	top: -1.65em;
+	height: 1.4em;
+	line-height: 1.4em;
+	margin: -1.7em 0 0 0;
+	text-indent: .3em;
 	width: 100%;
 }
 
