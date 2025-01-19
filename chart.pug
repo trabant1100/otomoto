@@ -39,8 +39,15 @@ mixin chart(id, scale, chronos, fn)
 				- var date = fn.parseDate(chronos[index ? index - 1 : 0].date)
 				- var textAnchor = index ? 'middle' : 'start'
 				- var dist = point.x - prevPoint.x - (index ? 5 : 0)
+				- var rightDist = scale.date - point.x
 				line.date(x1=point.x, y1=scale.price, x2=point.x, y2=scale.price + 3)
-				if dist >= 10
+				if dist >= 10 && rightDist >= 20
 					text(x=point.x, y=scale.price + 4, text-anchor=textAnchor, dominant-baseline='hanging', class='date')
 						| #{new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short' }).format(date)}
+		g.dateInfo
+			- var date = fn.parseDate(chronos.at(-1).date).plus({ days: 1 })
+			- var textAnchor = 'end'
+			line.date(x1=scale.date, y1=scale.price, x2=scale.date, y2=scale.price + 3)
+			text(x=scale.date, y=scale.price + 4, text-anchor=textAnchor, dominant-baseline='hanging', class='date')
+				| #{new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short' }).format(date)}
 		
