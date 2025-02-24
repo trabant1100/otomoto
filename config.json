@@ -71,7 +71,10 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-xlt-2-3l-ecoboost-304kmprzebieg-83-143kmzarejestrowany-w-polsce-ID6H6inB.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-300km-panorama-kamera-360-tempomat-aktywny-nowe-opony-ID6H7rVL.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-2020-kapitanskie-fotele-6-osobowy-ID6H8jml.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-3l-ecoboost-300-km-10at-naped-4x4-ID6H8uXr.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-3l-ecoboost-300-km-10at-naped-4x4-ID6H8uXr.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-platinium-3-0-gtdi-tc-v6-pelen-komfort-fv23-ID6GKKDW.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-v6-400km-wersja-st-awd-full-kamery360-radar-virtual-zamiana-faktur-ID6HaJpg.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-400hp-ID6HaRYI.html"
         ],
         "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
@@ -187,6 +190,11 @@
             [
                 "https://www.otomoto.pl/osobowe/oferta/ford-explorer-europa-457-km-4x4-7-osob-tuning-oryginal-lakier-skora-panorama-full-ID6GUZoR.html",
                 "https://www.otomoto.pl/osobowe/oferta/ford-explorer-europa-457-km-4x4-7-osob-tuning-oryginal-lakier-full-ID6GYkoK.html"
+            ],
+            [
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-rezerwacja-3-0-v6-457km-salon-polska-stan-idealny-serwis-aso-gwarancja-ID6H884e.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-3-0-ecoboost-phev-4wd-platinum-ID6H884e.html",
+                "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-v6-457km-salon-polska-stan-idealny-serwis-aso-gwarancja-ID6H884e.html"
             ]
         ],
         "vins": {
@@ -492,7 +500,7 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2021-salon-polska-faktura-vat23-gwarancja-platinum-masaze-hak-ID6H7aFa.html": {
                 "country": "PL"
             },
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-v6-457km-salon-polska-stan-idealny-serwis-aso-gwarancja-ID6H884e.html": {
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-rezerwacja-3-0-v6-457km-salon-polska-stan-idealny-serwis-aso-gwarancja-ID6H884e.html": {
                 "country": "PL",
                 "warning": [
                     "NO VIN"
