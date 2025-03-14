@@ -74,7 +74,9 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-3l-ecoboost-300-km-10at-naped-4x4-ID6H8uXr.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-platinium-3-0-gtdi-tc-v6-pelen-komfort-fv23-ID6GKKDW.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-v6-400km-wersja-st-awd-full-kamery360-radar-virtual-zamiana-faktur-ID6HaJpg.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-400hp-ID6HaRYI.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-400hp-ID6HaRYI.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-xlt-2-3-ecoboost-300-km-4x4-awd-bogata-wersja-ID6HewHT.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-0-ecoboost-304-km-benzyna-lpg-ID6HdCtd.html"
         ],
         "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
@@ -127,7 +129,9 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2-3-ecoboost-odpala-i-jezdzi-na-miejscu-w-pl-ID6H7Of9.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-platinum-2020-3-0l-ID6H8In9.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-4x4-automat-benzyna-panorama-ID6H75Mp.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2021-ford-explorer-st-benzyna-4x4-automat-ID6H9xkY.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2021-ford-explorer-st-benzyna-4x4-automat-ID6H9xkY.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-hybryda-457-km-europa-platinum-plug-in-59-tys-km-ID6Hc0vu.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-2021-3-0l-ID6HcIi3.html"
         ],
         "fav_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html",
@@ -230,7 +234,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-4wd-457km-pierwszy-wlasciciel-ID6GMIdP.html": "WF02K8HY6LGC17284",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-3-0-ecoboost-phev-4wd-platinum-7os-dach-went-ogrz-fotele-ID6H0dQN.html": "WF02K8HY3MNA03639",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-performance-vat23-leasing-ID6H0Ash.html": "1FM5K8GC1LGD19459",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-benzyna-st-400km-7os-petarda-pelna-wyposazenie-4x4-ID6H0VxA.html": "1FM5K8GC5MGA73713"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-benzyna-st-400km-7os-petarda-pelna-wyposazenie-4x4-ID6H0VxA.html": "1FM5K8GC5MGA73713",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-410km-zarejestrowany-gwarancja-ID6HdaO5.html": "1FM5K8GC8MGA97343"
         },
         "notes": {
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2020-ford-explorer-st-performance-400hp-ID6EY8WB.html": {
@@ -515,6 +520,19 @@
                 "warning": [
                     "Leasing"
                 ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-pierwszy-wlasciciel-zakupiony-w-polskim-salonie-ford-na-gwarancji-ID6HbH72.html": {
+                "country": "PL"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-410km-zarejestrowany-gwarancja-ID6HdaO5.html": {
+                "country": "CA",
+                "price": {
+                    "USD": {
+                        "date": "13.08.2024",
+                        "value": 10000
+                    }
+                },
+                "damage": [ "front", "airbags"]
             }
         }
     }
