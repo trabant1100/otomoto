@@ -6,6 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const api_key = process.env.API_KEY;
 const DEBUG = process.env.DEBUG;
+const onlyYear = process.argv[2];
 
 (async function main() {
 	const config = JSON.parse(await fs.readFile('config.json'));

@@ -9,6 +9,10 @@
             {
                 "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2021?search%5Bfilter_float_year%3Ato%5D=2021&search%5Badvanced_search_expanded%5D=false",
                 "year": 2021
+            },
+            {
+                "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2022?search%5Bfilter_float_year%3Ato%5D=2022&search%5Badvanced_search_expanded%5D=false",
+                "year": 2022
             }
         ]
     },
@@ -76,7 +80,14 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-v6-400km-wersja-st-awd-full-kamery360-radar-virtual-zamiana-faktur-ID6HaJpg.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-400hp-ID6HaRYI.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-xlt-2-3-ecoboost-300-km-4x4-awd-bogata-wersja-ID6HewHT.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-0-ecoboost-304-km-benzyna-lpg-ID6HdCtd.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2021-2-0-ecoboost-304-km-benzyna-lpg-ID6HdCtd.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-prawie-nowy-czysta-benzyna-400hp-ID6GkqOX.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-2-3-ecoboost-300km-2022r-4x4-49-tys-km-super-stan-ID6GGF7P.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-4x4-explorer-2-3-benz-300-km-2022r-warszawa-ID6GHWvl.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-3-0-benzyna-4x4-biturbo-410-km-09-2022-hak-6-osobowy-perla-ID6GOmiI.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-319km-limited-gwarancja-faktura-vat23-ID6GWodB.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-benzyna-400-koni-polecam-ID6H7BfO.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-limited-2-3-turbo-4x4-13-tys-km-jasna-skora-fvat-23-gwarancja-ID6HaAoa.html"
         ],
         "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
@@ -131,7 +142,8 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-4x4-automat-benzyna-panorama-ID6H75Mp.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2021-ford-explorer-st-benzyna-4x4-automat-ID6H9xkY.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-0-hybryda-457-km-europa-platinum-plug-in-59-tys-km-ID6Hc0vu.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-2021-3-0l-ID6HcIi3.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-2021-3-0l-ID6HcIi3.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-3-0-v6-400km-4x4-awd-skora-automat-duzy-lcd-kamera-virtual-idealny-ID6Hew2B.html"
         ],
         "fav_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-pakiet-track-pack-2-kpl-opon-ID6Gxeuq.html",
@@ -532,7 +544,16 @@
                         "value": 10000
                     }
                 },
-                "damage": [ "front", "airbags"]
+                "damage": [
+                    "front",
+                    "airbags"
+                ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2022-plug-in-470-km-ID6HdDSV.html": {
+                "country": "PL",
+                "warning": [
+                    "Leasing"
+                ]
             }
         }
     }
