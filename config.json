@@ -13,6 +13,10 @@
             {
                 "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2022?search%5Bfilter_float_year%3Ato%5D=2022&search%5Badvanced_search_expanded%5D=false",
                 "year": 2022
+            },
+            {
+                "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2023?search%5Bfilter_float_year%3Ato%5D=2023&search%5Badvanced_search_expanded%5D=false",
+                "year": 2023
             }
         ]
     },
@@ -87,7 +91,10 @@
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-3-0-benzyna-4x4-biturbo-410-km-09-2022-hak-6-osobowy-perla-ID6GOmiI.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-3-3-v6-hev-319km-limited-gwarancja-faktura-vat23-ID6GWodB.html",
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-explorer-st-benzyna-400-koni-polecam-ID6H7BfO.html",
-            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-limited-2-3-turbo-4x4-13-tys-km-jasna-skora-fvat-23-gwarancja-ID6HaAoa.html"
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-limited-2-3-turbo-4x4-13-tys-km-jasna-skora-fvat-23-gwarancja-ID6HaAoa.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-2023-jedyny-taki-explorer-st-ID6GB82j.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-line-2-3-benzyna-300-km-4x4-ID6GRKwH.html",
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-st-2023r-ID6GYnSg.html"
         ],
         "crashed_urls": [
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-niski-przebieg-piekny-srodek-awd-400-hp-ID6GvEeE.html",
@@ -554,6 +561,15 @@
                 "warning": [
                     "Leasing"
                 ]
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-platinum-salon-pl-nowy-gwarancja-do-2030r-plug-in-457-km-ID6GBG5h.html": {
+                "country": "PL"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-3-0-v6-ecoboost-biturbo-phev-457-km-automat-a10-ID6H9JS7.html": {
+                "country": "PL"
+            },
+            "https://www.otomoto.pl/osobowe/oferta/ford-explorer-st-line-3-0-457km-phev-od-dealera-ID6HbhJN.html": {
+                "country": "PL"
             }
         }
     }
