@@ -26,8 +26,11 @@ async function generateRefMap() {
 	const hashes = await Promise.all(calcHashes);
 	clearInterval(progress);
 	pool.terminate();
-	
+
+
+	const existingHashes = JSON.parse(await fs.readFile('./images/hashes.json'));
 	for (const { imgHash, filename } of hashes) {
+		existingHashes[filename] = imgHash;
 		let valueArray;
 		if (refMap.has(imgHash)) {
 			const existingPaths = refMap.get(imgHash);
@@ -37,6 +40,10 @@ async function generateRefMap() {
 		}
 		refMap.set(imgHash, valueArray);
   	}
+
+  	console.log('Writing ./images/hashes.json');
+  	await fs.writeFile('./images/hashes.json', JSON.stringify(existingHashes, null, 4));
+
 	return refMap;
 }
 

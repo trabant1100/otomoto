@@ -4,9 +4,17 @@ const workerpool = require('workerpool');
 const { imageFromBuffer, getImageData } = require('@canvas/image');
 
 let processed = 0;
+let existingHashes;
 
-async function calcHash(fileIndex, filename) {
-	const imgHash = await hash(filename);
+async function calcHash(i, filename) {
+	let imgHash;
+	if (existingHashes[filename] !== undefined) {
+		imgHash = existingHashes[filename];
+	} else {
+		imgHash = await hash(filename);
+		existingHashes[filename] = imgHash;
+	}
+
 	return { imgHash, filename };
 }
 
@@ -56,4 +64,7 @@ function hexToBin(hexString) {
 	return result;
 }
 
-workerpool.worker({ calcHash: calcHash });
+(async function() {
+	existingHashes = JSON.parse(await fs.readFile('./images/hashes.json'));
+	workerpool.worker({ calcHash: calcHash });
+})();
