@@ -573,11 +573,15 @@
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-awd-plugin-st-line-7os-led-pano-kam360-asystenci-wentyl-gwarancja-fv23-ID6Hc3Ln.html": {
                 "country": "SE",
-                "warning": ["NO VIN"]
+                "warning": [
+                    "NO VIN"
+                ]
             },
             "https://www.otomoto.pl/osobowe/oferta/ford-explorer-ford-explorer-2022-hybryda-plug-in-457-km-cesja-leasingu-ID6HdDSV.html": {
                 "country": "PL",
-                "warning": ["Leasing"]
+                "warning": [
+                    "Leasing"
+                ]
             }
         }
     }
