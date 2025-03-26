@@ -184,6 +184,14 @@ async function createHtml(report, listingDir, { bannedUrls, crashedUrls, favUrls
 		return Math.floor(Interval.fromDateTimes(date, DateTime.now()).toDuration('days').days);
 	};
 
+	fn.priceInPln = function(price, currency) {
+		return currency == 'EUR' ? Math.round(parseInt(price) * 4.2) : price;
+	};
+
+	fn.finalPriceInPln = function(price, currency) {
+		return currency == 'EUR' ? Math.round(parseInt(price) * 4.2 * 1.093) : price;
+	}
+
 	return pugger( { report, bannedUrls, crashedUrls, favUrls, deadUrls, scale, fn } );
 }
 

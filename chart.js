@@ -5,8 +5,8 @@ const fn = {
 	parseDate(str) {
 		return DateTime.fromFormat(str, DATE_FORMAT);
 	},
-	formatMoney(price) {
-		return (new Intl.NumberFormat('pl-PL').format(price)) + ' zł'
+	formatMoney(price, currency) {
+		return (new Intl.NumberFormat('pl-PL').format(price)) + ' ' + (currency == 'EUR' ? '€' : 'zł');
 	},
 	calculatePriceInfos(chronosPoints, chronos, scale) {
 		const priceInfos = [];
@@ -40,7 +40,7 @@ const fn = {
 
 		for (const [i, priceInfo] of priceInfos.entries()) {
 			const { index, points, point } = priceInfo;
-			const price = this.formatMoney(chronos[index].price);
+			const price = this.formatMoney(chronos[index].price, chronos[index].currency);
 			const priceWidth = price.length * 3.67 + 3;
 			const trans = this.translatePriceInfo(
 				{ x: 0, y: 0, width: scale.date, height: scale.price },

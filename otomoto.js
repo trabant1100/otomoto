@@ -23,9 +23,9 @@ const onlyYear = process.argv[2];
 		await fs.mkdir('./DEBUG', { recursive: true });
 	}
 
-	for (const {url, year} of listingUrls) {
+	for (const {url, year, kind = 'otomoto'} of listingUrls) {
 		console.log(`Listing year ${year}`);
-		console.log('Getting list of auctions');
+		console.log(`Getting list of auctions ${kind}`);
 		const debugFilename = `./DEBUG/${year}.html`;
 		let data = {};
 		try {
@@ -56,24 +56,50 @@ const onlyYear = process.argv[2];
 			}
 		}
 		const $ = cheerio.load(data);
-		const articles = $('article').toArray();
 		const auctions = [];
 
-		let auctionIdx = 0;
-		for (const el of articles) {
-			const jqSection = $(el).children('section');
-			const jqDivs = jqSection.children('div');
+		if (kind == 'otomoto') {
+			const articles = $('article').toArray();
 
-			const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
-			const url = jqDivs.find('a').eq(0).attr('href');
-			const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
-			const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
+			let auctionIdx = 0;
+			for (const el of articles) {
+				const jqSection = $(el).children('section');
+				const jqDivs = jqSection.children('div');
 
-			if (thumbnailUrl && url) {
+				const thumbnailUrl = jqDivs.eq(0).find('img').attr('src');
+				const url = jqDivs.find('a').eq(0).attr('href');
+				const mileage = jqDivs.eq(2).children('dl').eq(0).children('dd').eq(0).text();
+				const location = jqDivs.eq(2).children('dl').eq(1).children('dd').eq(0).children('p').text();
+
+				if (thumbnailUrl && url) {
+					console.log(`Getting details of auction #${auctionIdx + 1}`);
+					try {
+					  const details = await getAuctionDetails(url, { kind });
+					  const auction = { thumbnailUrl, url, mileage, location, year, ...details };
+					  auctions.push(auction);
+					} catch (e) {
+					  console.error(`Error auction #${auctionIdx + 1}: ${e}`);
+					}
+					auctionIdx++;
+				}
+			}
+		} else if (kind == 'mobile.de') {
+			let auctionIdx = 0;
+			let src = $('div#root + script').eq(0).text();
+			src = src.substring(0, src.indexOf('window.__PUBLIC_CONFIG__')).replace('window.__INITIAL_STATE__ = ', '');
+			const data = JSON.parse(src);
+			const items = data.search.srp.data.searchResults.items.filter(item => item.vc == 'Car');
+			for (const item of items) {
+				const thumbnailUrl = item.previewImage.srcSet.split(', ').at(-1).replace(/ .*$/, '');
+				const url = 'https://suchen.mobile.de/fahrzeuge/details.html?id=' + item.id;
+				const mileage = item.attr.ml;
+				const location = item.attr.loc;
+				const country = item.attr.cn;
+
 				console.log(`Getting details of auction #${auctionIdx + 1}`);
 				try {
-				  const details = await getAuctionDetails(url);
-				  const auction = { thumbnailUrl, url, mileage, location, year, ...details };
+				  const details = await getAuctionDetails(url, { kind, mobileItemId: item.id });
+				  const auction = { thumbnailUrl, url, mileage, location, country, year, ...details };
 				  auctions.push(auction);
 				} catch (e) {
 				  console.error(`Error auction #${auctionIdx + 1}: ${e}`);
@@ -99,7 +125,7 @@ function getScrapeUrl(url) {
 	return proxyUrl;
 }
 
-async function getAuctionDetails(url) {
+async function getAuctionDetails(url, { kind, mobileItemId }) {
 	const debugFilename = './DEBUG/' + url.replaceAll(/[/:]/g, '_');
 	let data = {};
 	try {
@@ -128,18 +154,35 @@ async function getAuctionDetails(url) {
 	
 	return new Promise(resolve => {
 		const $ = cheerio.load(data);
-		const advert = JSON.parse($('#__NEXT_DATA__').eq(0).text()).props.pageProps.advert;
+		let title, description, fullDescription, price, currency, date, id, imgUrls;
 
-		const title = advert.title;
-		const description = '';
-		const fullDescription = advert.description;
-		const price = advert.price.value;
-		const date = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'long', timeStyle: 'short' })
-			.format(new Date(advert.createdAt));
-		const id = advert.id;
-		const imgUrls = advert.images.photos.map(p => p.url);
+		if (kind == 'otomoto') {
+			const advert = JSON.parse($('#__NEXT_DATA__').eq(0).text()).props.pageProps.advert;
 
-		resolve({ title, description, fullDescription, price, date, id, imgUrls });
+			title = advert.title;
+			description = '';
+			fullDescription = advert.description;
+			price = advert.price.value;
+			date = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'long', timeStyle: 'short' })
+				.format(new Date(advert.createdAt));
+			id = advert.id;
+			imgUrls = advert.images.photos.map(p => p.url);
+		} else if (kind == 'mobile.de') {
+			let src = $('div#root + script').eq(0).text();
+			src = src.substring(0, src.indexOf('window.__PUBLIC_CONFIG__')).replace('window.__INITIAL_STATE__ = ', '');
+			const item = JSON.parse(src);
+			const ad = item.search.vip.ads[mobileItemId];
+			title = ad.data.ad.title;
+			description = '';
+			fullDescription = ad.data.ad.htmlDescription;
+			price = ad.data.ad.price.grossAmount + '';
+			currency = ad.data.ad.price.grossCurrency;
+			date = '';
+			id = mobileItemId;
+			imgUrls = ad.data.ad.galleryImages.map(p => p.srcSet.split(', ').at(-1).replace(/ .*$/, ''));
+		}
+
+		resolve({ title, description, fullDescription, price, currency, date, id, imgUrls });
 	});
 }
 

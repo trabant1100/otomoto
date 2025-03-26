@@ -5,6 +5,7 @@
             {
                 "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2020?search%5Bfilter_float_year%3Ato%5D=2020",
                 "year": 2020
+
             },
             {
                 "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2021?search%5Bfilter_float_year%3Ato%5D=2021&search%5Badvanced_search_expanded%5D=false",
@@ -17,6 +18,11 @@
             {
                 "url": "https://www.otomoto.pl/osobowe/ford/explorer/od-2023?search%5Bfilter_float_year%3Ato%5D=2023&search%5Badvanced_search_expanded%5D=false",
                 "year": 2023
+            },
+            {
+                "url": "https://suchen.mobile.de/fahrzeuge/search.html?cn=DE&dam=false&fr=2020%3A2020&ft=HYBRID&isSearchRequest=true&ml=%3A80000&ms=9000%3B14%3B%3B&ref=dsp&s=Car&sb=rel&vc=Car",
+                "year": 2020,
+                "kind": "mobile.de"
             }
         ]
     },

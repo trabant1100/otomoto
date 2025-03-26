@@ -2,7 +2,7 @@ mixin snapshotDetail(snapshot)
 	.lastDate
 		a(href=`../listing/${snapshot.snapshotDate}/${snapshot.id}.html`)
 			=new Intl.DateTimeFormat("pl-PL", { day: 'numeric', month: 'long' }).format(fn.parseDate(snapshot.snapshotDate))
-	.price= (new Intl.NumberFormat('pl-PL').format(snapshot.price)) + ' zł'
+	.price= (new Intl.NumberFormat('pl-PL').format(snapshot.price)) + ' ' + (snapshot.currency == 'EUR' ? '€' : 'zł')
 
 doctype html
 html(lang="pl")
@@ -40,13 +40,15 @@ html(lang="pl")
 					- var dead = auction.dead ? 'dead' : ''
 					- var ended = auction.ended ? 'ended' : ''
 					- var new_ = auction.new ? 'new' : ''
-					- var country = auction.notes?.country;
+					- var country = lastSnapshot.country ?? auction.notes?.country;
 					- var className = ['auction', banned, crashed, fav, dead, ended, new_, country].join(' ')
 					- var year = `--year: ${auction.year}`
-					- var price = `--price: ${lastSnapshot.price}`
+					- var price = `--price: ${fn.finalPriceInPln(lastSnapshot.price, lastSnapshot.currency)}`
 					- var style = [year, price].join('; ')
 					- var age = Math.floor(fn.age(fn.parseDate(firstSnapshot.snapshotDate)) / (356/2) * 100);
 					- var firstAuction = fn.parseDate(firstSnapshot.snapshotDate).toRelative({ locale: 'pl-PL'})
+					- var currency = lastSnapshot.currency == 'EUR' ? '€' : 'zł'
+					- var finalPrice = lastSnapshot.currency == 'EUR' ? ` ≈ ${new Intl.NumberFormat('pl-PL').format(fn.finalPriceInPln(lastSnapshot.price, lastSnapshot.currency))} zł` : ''
 					div(class=className, style=style, data-price-drop=priceChange < 0, data-price-rise=priceChange > 0)
 						- var snapshots = auction.snapshots.toReversed()
 						a(class='otomotoAuctionLink', href=lastSnapshot.url, target='_blank', style="--background: url('" + lastSnapshot.imgUrls[0] + "')" )
@@ -82,12 +84,12 @@ html(lang="pl")
 								| #{(auction.vin || '').toUpperCase()}
 						.details
 							.mileage= lastSnapshot.mileage
-							.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ' zł'
+							.price= (new Intl.NumberFormat('pl-PL').format(lastSnapshot.price)) + ` ${currency}` + finalPrice
 						.notes
 							div
 
 						.history(style=`--snapshots-count: ${snapshots.length-1};`)
-							- var chronos = snapshots.toReversed().map(s => ({ date: s.snapshotDate, price: s.price }))
+							- var chronos = snapshots.toReversed().map(s => ({ date: s.snapshotDate, price: s.price, currency: s.currency }))
 							+chart(auctionId, scale, chronos, fn)
 							details
 								summary.snapshot
