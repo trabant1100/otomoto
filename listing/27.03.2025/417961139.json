@@ -1,0 +1,22 @@
+{
+  "thumbnailUrl": "https://img.classistatic.de/api/v1/mo-prod/images/d4/d432c84a-993e-4d96-a454-26659bfaafee?rule=mo-1024w.jpg",
+  "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=417961139",
+  "mileage": "55.000 km",
+  "location": "Villingen-Schwenningen",
+  "country": "DE",
+  "year": 2020,
+  "title": "Ford Explorer 3,0 l EcoBoost PHEV 4x4 ST-Line Aut...",
+  "description": "",
+  "fullDescription": "Sehr gepflegtes Fahrzeug aus erster Hand. Verfügbar  ab 1.4.2025",
+  "price": "41200",
+  "currency": "EUR",
+  "date": "",
+  "id": 417961139,
+  "imgUrls": [
+    "https://img.classistatic.de/api/v1/mo-prod/images/d4/d432c84a-993e-4d96-a454-26659bfaafee?rule=mo-1600.jpg",
+    "https://img.classistatic.de/api/v1/mo-prod/images/6e/6e16a554-460b-4391-a18a-3f9dce2b36d5?rule=mo-1600.jpg",
+    "https://img.classistatic.de/api/v1/mo-prod/images/61/618ea337-646a-4aed-ae73-58b19f936342?rule=mo-1600.jpg",
+    "https://img.classistatic.de/api/v1/mo-prod/images/03/0369b7e3-c48c-482f-947c-25f389ddf4ad?rule=mo-1600.jpg",
+    "https://img.classistatic.de/api/v1/mo-prod/images/b0/b092219e-a875-4979-884a-d6456931123b?rule=mo-1600.jpg"
+  ]
+}
