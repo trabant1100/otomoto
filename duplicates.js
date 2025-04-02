@@ -116,36 +116,64 @@ function patchConfig(config, duplicates) {
 	}
 }
 
-(async function() {
+async function findDuplicateAuctions(imagesDir) {
+	const files = (await getFileNames()).filter(fname => /.webp$/.test(fname));
+	const auctionImages = {};
+
+    // Group images by auction ID
+    for (const file of files) {
+        const [auctionId] = file.split("_");
+        if (!auctionImages[auctionId]) auctionImages[auctionId] = [];
+        auctionImages[auctionId].push(file);
+    }
+
+    // Generate reference map
+    const refMap = await generateRefMap();
+
+    // Reverse the mapping to group auctions by hash
+    const auctionHashGroups = {};
+    for (const [hash, filenames] of refMap) {
+        const auctions = new Set(filenames.map(file => ((file.match(/\d+(?=_\d+.webp$)/) ?? [])[0])));
+        for (const auction of auctions) {
+			if (!auctionHashGroups[auction]) {
+				auctionHashGroups[auction] = [];
+			}
+			auctionHashGroups[auction].push(hash);
+			auctionHashGroups[auction].sort();
+		}
+    }
+	for (const auction in auctionHashGroups) {
+		auctionHashGroups[auction] = auctionHashGroups[auction].join(', ');
+	}
+
+    // Identify duplicate auctions
+	let duplicates = {};
+	for (const [auction, hash] of Object.entries(auctionHashGroups)) {
+		if (!duplicates[hash]) {
+			duplicates[hash] = [];
+		}
+		duplicates[hash].push(auction);
+	}
+	for (const hash in duplicates) {
+		if (duplicates[hash].length < 2) {
+			delete duplicates[hash];
+		}
+	}
+
+	const dupArr = [];
+	for (const dups of Object.values(duplicates)) {
+		dupArr.push(dups);
+	}
+
+    return dupArr;
+}
+
+
+async function main() {
 	console.log('Analyzing images');
 	const config = JSON.parse(await fs.readFile('config.json'));
 	const listingDir = config.listing.dir;
-	let duplicates = [];
-
-	const refMap = await generateRefMap();
-	for (const [key, value] of refMap) {
-	  	if (value.length > 1) {
-	  		let ids = [];
-	  		for (const val of value) {
-	  			const auctionId = (val.match(/\d+(?=_\d+.webp$)/) ?? [])[0];
-	  			ids.push(auctionId);
-	  		}
-	  		ids = [...new Set(ids)];
-	  		if (ids.length > 1) {
-	  			duplicates.push(ids);
-	  		}
-	  	}
-  	}
-
-
-  	duplicates = duplicates.reduce(
-  		(acc, val) => {
-  			const dup1 = new Set(val);
-  			if (!acc.some(dup => equalSets(new Set(dup), dup1))) {
-  				acc.push(val);
-  			}
-  			return acc;
-  		}, []);
+	let duplicates = await findDuplicateAuctions(imgFolder);
 
 	duplicates = await Promise.all(duplicates.map(async dup => {
 		return await Promise.all(dup.map(async (id) => await getAuctionUrl(listingDir, id)));
@@ -154,4 +182,12 @@ function patchConfig(config, duplicates) {
 
   	console.log('Writing config.json');
   	await fs.writeFile('config.json', JSON.stringify(config, null, 4));
-})();
+}
+
+
+if (require.main === module) {
+	main();
+}
+
+
+module.exports = { findDuplicateAuctions };
