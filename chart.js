@@ -41,7 +41,7 @@ const fn = {
 		for (const [i, priceInfo] of priceInfos.entries()) {
 			const { index, points, point } = priceInfo;
 			const price = this.formatMoney(chronos[index].price, chronos[index].currency);
-			const priceWidth = price.length * 3.67 + 3;
+			const priceWidth = price.length * 3.67 + (chronos[index].currency == 'EUR' ? 5 : 3);
 			const trans = this.translatePriceInfo(
 				{ x: 0, y: 0, width: scale.date, height: scale.price },
 				// [points],
