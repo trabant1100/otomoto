@@ -2,6 +2,7 @@ const fs = require('node:fs/promises');
 const qs = require('querystring');
 const { DateTime } = require('luxon');
 const DATE_FORMAT = 'dd.MM.yyyy';
+const {default: axiosRetry, isNetworkOrIdempotentRequestError } = require('axios-retry');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const api_key = process.env.API_KEY;
@@ -15,6 +16,14 @@ const onlyYear = process.argv[2];
 	const today = DateTime.now().toFormat(DATE_FORMAT);
 	const auctionsDir = listingDir + '/' + today;
 	const imagesDir = './images';
+	
+	axiosRetry(axios, { 
+		retries: 3,
+		onRetry: (retryCount, error) => {
+			console.error(`Retrying #${retryCount}`);
+		},
+		retryCondition: error => error.response.status >= 400
+	});
 
 	await fs.mkdir(auctionsDir, { recursive: true });
 	await fs.mkdir(imagesDir, { recursive: true });
@@ -52,7 +61,7 @@ const onlyYear = process.argv[2];
 			if (DEBUG) {
 				throw e;
 			} else {
-				throw e.response.data;
+				console.error(e.response.data);
 			}
 		}
 		const $ = cheerio.load(data);
@@ -87,6 +96,9 @@ const onlyYear = process.argv[2];
 			let auctionIdx = 0;
 			let src = $('div#root + script').eq(0).text();
 			src = src.substring(0, src.indexOf('window.__PUBLIC_CONFIG__')).replace('window.__INITIAL_STATE__ = ', '');
+			if (!src) {
+				continue;
+			}
 			const data = JSON.parse(src);
 			const items = data.search.srp.data.searchResults.items.filter(item => item.vc == 'Car');
 			for (const item of items) {
