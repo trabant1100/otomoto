@@ -20,7 +20,7 @@ const onlyYear = process.argv[2];
 	axiosRetry(axios, { 
 		retries: 3,
 		onRetry: (retryCount, error) => {
-			console.error(`Retrying #${retryCount}`);
+			console.error(`Retrying #${retryCount}`, error.response.status);
 		},
 		retryCondition: error => error.response.status >= 400
 	});
@@ -48,9 +48,9 @@ const onlyYear = process.argv[2];
 				}
 			}
 			if (download) {
-				data = (await axios.get(getScrapeUrl(url))).data;
+				data = (await axios.get(getScrapeUrl(url) + (kind == 'mobile.de' ? '&residential=true' : ''))).data;
 				if (DEBUG) {
-					console.debug(`Writing ${debugFilename}`);
+					console.debug(`Writing ${debugFilename}`);''
 					await fs.writeFile(debugFilename, data);
 				}
 			} else {
