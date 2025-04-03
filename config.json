@@ -32,8 +32,8 @@
                 "url": "https://suchen.mobile.de/fahrzeuge/search.html?cn=DE&dam=false&fr=2021%3A2021&ft=HYBRID&isSearchRequest=true&ml=20000%3A60000&ms=9000%3B14%3B%3B&ref=srp&sb=rel&vc=Car&pageNumber=2",
                 "year": 2021,
                 "kind": "mobile.de"
-            } 
-         ] 
+            }
+        ]
     },
     "report": {
         "dir": "report",
