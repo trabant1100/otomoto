@@ -102,6 +102,7 @@ const onlyYear = process.argv[2];
 			const data = JSON.parse(src);
 			const items = data.search.srp.data.searchResults.items.filter(item => item.vc == 'Car');
 			for (const item of items) {
+				try {
 				const thumbnailUrl = item.previewImage.srcSet.split(', ').at(-1).replace(/ .*$/, '');
 				const url = 'https://suchen.mobile.de/fahrzeuge/details.html?id=' + item.id;
 				const mileage = item.attr.ml;
@@ -109,7 +110,7 @@ const onlyYear = process.argv[2];
 				const country = item.attr.cn;
 
 				console.log(`Getting details of auction #${auctionIdx + 1}`);
-				try {
+				 
 				  const details = await getAuctionDetails(url, { kind, mobileItemId: item.id });
 				  const auction = { thumbnailUrl, url, mileage, location, country, year, ...details };
 				  auctions.push(auction);
