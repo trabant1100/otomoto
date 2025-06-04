@@ -14,7 +14,7 @@ const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
 	const report = await generateReport(today, relistedUrls, vins, normalizeNotes(notes), listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls });
 	console.log('Writing report json');
 	await fs.mkdir(reportDir, { recursive: true });
-	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null, 2));
+	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null));
 
 	const html = await createHtml(normalizeReport(report), listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls });
 	console.log('Writing report html');
