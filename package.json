@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@canvas/image": "^2.0.0",
+    "adm-zip": "^0.5.16",
     "axios": "^1.7.4",
     "axios-retry": "^4.5.0",
     "blockhash-core": "^0.1.0",

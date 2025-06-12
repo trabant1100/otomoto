@@ -1,6 +1,7 @@
 const fs = require('node:fs/promises');
 const fn = require('./chart.js');
 const { DateTime, Interval } = require('luxon');
+const AdmZip = require('adm-zip');
 const DATE_FORMAT = 'dd.MM.yyyy';
 const pug = require('pug');
 const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
@@ -12,9 +13,11 @@ const today = process.argv[2] ?? DateTime.now().toFormat(DATE_FORMAT);
 		relisted_urls: relistedUrls, vins, notes } = config.report;
 
 	const report = await generateReport(today, relistedUrls, vins, normalizeNotes(notes), listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls });
-	console.log('Writing report json');
+	console.log('Writing report json to zip');
 	await fs.mkdir(reportDir, { recursive: true });
-	await fs.writeFile(`${reportDir}/${today}.json`, JSON.stringify(report, null));
+	const zip = new AdmZip();
+	zip.addFile(`${today}.json`, Buffer.from(JSON.stringify(report, null, 2), 'utf8'), 'report');
+	zip.writeZip(`${reportDir}/${today}.zip`);
 
 	const html = await createHtml(normalizeReport(report), listingDir, { bannedUrls, crashedUrls, favUrls, deadUrls });
 	console.log('Writing report html');
