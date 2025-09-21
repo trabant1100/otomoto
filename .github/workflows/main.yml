@@ -53,13 +53,16 @@ jobs:
       - name: copy listings
         run: |
           cp -r listing github-pages
+          rm -rf listing
       - name: copy images
         run: |
           cp -r images github-pages
+          rm -rf images
       - name: copy reports
         run: |
           mkdir github-pages/report
           cp report/*.html github-pages/report
+          rm -rf report
       - name: copy index.html and stylesheet
         run: |
           cp index.html github-pages/
