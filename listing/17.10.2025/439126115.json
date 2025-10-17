@@ -1,0 +1,24 @@
+{
+  "thumbnailUrl": "https://img.classistatic.de/api/v1/mo-prod/images/3e/3e468b7d-3f67-4a76-9421-fa4b72e8ae63?rule=mo-1024w",
+  "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=439126115",
+  "mileage": "74.000 km",
+  "location": "Salzweg",
+  "country": "DE",
+  "year": 2020,
+  "title": "Ford Explorer 3,0 l EcoBoost PHEV 4x4 ST-Line Aut...",
+  "description": "",
+  "fullDescription": "Absolut gepflegter Zustand,<br>Sommereifen auf schwarzen Alufelgen, neue Hundebox als Extraanfertigung für das Fahrzeug (auf Wunsch).",
+  "price": "43500",
+  "currency": "EUR",
+  "date": "",
+  "id": 439126115,
+  "imgUrls": [
+    "https://img.classistatic.de/api/v1/mo-prod/images/3e/3e468b7d-3f67-4a76-9421-fa4b72e8ae63?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/c6/c60023c6-26ff-4fbf-a286-756013a542e9?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/99/996b04c3-b2ce-4cbc-b7c9-098fd01db0b2?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/79/79f4d4bf-d309-493f-8a18-902d771aefe2?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/d6/d6342f6e-3efe-4f01-b6c4-27520ec24c32?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/2b/2b15b9e1-dbac-4010-9903-bf38e8f4ea45?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/a2/a2c0e774-e057-45d2-89ff-622efb46bde8?rule=mo-1600"
+  ]
+}
