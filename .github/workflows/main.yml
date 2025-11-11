@@ -54,10 +54,10 @@ jobs:
         run: |
           cp -r listing github-pages
           rm -rf listing
-      - name: copy images
-        run: |
-          cp -r images github-pages
-          rm -rf images
+      #- name: copy images
+       # run: |
+         # cp -r images github-pages
+         # rm -rf images
       - name: copy reports
         run: |
           mkdir github-pages/report
