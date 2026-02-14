@@ -1,0 +1,21 @@
+{
+  "thumbnailUrl": "https://img.classistatic.de/api/v1/mo-prod/images/e0/e02474d0-edc0-415a-9622-c32bfa847ec3?rule=mo-1024w",
+  "url": "https://suchen.mobile.de/fahrzeuge/details.html?id=441021719",
+  "mileage": "27.000 km",
+  "location": "Elmenhorst",
+  "country": "DE",
+  "year": 2021,
+  "title": "Ford Explorer 3,0 l EcoBoost PHEV ST-Line, 22\", AHK ",
+  "description": "",
+  "fullDescription": "Abnehmbare orig. Ford Anhängerkupplung<br>H&amp;R Tieferlegung 40mm<br>22&quot; Corspeed Deville Alufelgen schwarz pulberbeschichtet mit 285/40 R22 Pirelli Scorpion Zero All Season<br>FOX Edelstahl Endschalldämpfer, Rohre schwarz emalliert<br>Neuwagenanschlußgarantie von Car Garantie kann übernommen werden<br>Mwst. möglich",
+  "price": "49900",
+  "currency": "EUR",
+  "date": "",
+  "id": 441021719,
+  "imgUrls": [
+    "https://img.classistatic.de/api/v1/mo-prod/images/e0/e02474d0-edc0-415a-9622-c32bfa847ec3?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/a3/a3670ae0-7950-44d2-837b-c35ae2e6b418?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/04/0475a4b2-4e84-4fa0-8731-52220875d794?rule=mo-1600",
+    "https://img.classistatic.de/api/v1/mo-prod/images/99/996d3076-b023-463e-832c-a2e216ca5960?rule=mo-1600"
+  ]
+}
